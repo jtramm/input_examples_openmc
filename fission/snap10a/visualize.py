@@ -130,7 +130,7 @@ plot_configs = [
                   "28 fuel elements, water-flooded core, full water reflection"),
     },
     {
-        "file_in": "plot_2.png",
+        "file_in": "plot_xy_core.png",
         "file_out": "snap10a_xy_core.png",
         "extent": [-14.0, 14.0, -14.0, 14.0],
         "xlabel": "X (cm)",
@@ -139,7 +139,7 @@ plot_configs = [
                   "37-position triangular pitch array, 28 fuel elements loaded"),
     },
     {
-        "file_in": "plot_3.png",
+        "file_in": "plot_xz_side.png",
         "file_out": "snap10a_xz_side.png",
         "extent": [-35.0, 35.0, -35.0, 35.0],
         "xlabel": "X (cm)",

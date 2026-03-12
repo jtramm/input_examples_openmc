@@ -1,0 +1,30 @@
+{
+  "benchmark": {
+    "name": "SNAP-10A/2 SCA-4B Case 8490a",
+    "source": "ORNL/TM-2005/54",
+    "description": "SNAP 10A/2 space reactor benchmark, SCA-4B experimental program, Case 8490a: 28 SCA-4 fuel elements, water-flooded core, full water reflection (9 in. upper tank). Simplest Phase I configuration with no Lucite rods or beryllium inserts.",
+    "reference_keff_experimental": 0.99984,
+    "reference_keff_mcnp5": 1.00491,
+    "reference_sigma_mcnp5": 0.00069,
+    "benchmark_uncertainty": 0.008
+  },
+  "openmc_results": {
+    "keff": 1.0033521636524463,
+    "keff_sigma": 0.0010265719494211725,
+    "particles_per_batch": 10000,
+    "total_batches": 150,
+    "inactive_batches": 50,
+    "active_batches": 100
+  },
+  "comparison": {
+    "diff_from_experimental": 0.0035121636524463318,
+    "diff_from_experimental_pcm": 351.21636524463315,
+    "diff_from_mcnp5": -0.0015578363475536872,
+    "diff_from_mcnp5_pcm": -155.78363475536872,
+    "combined_sigma": 0.0012369114630151935,
+    "n_sigma_from_mcnp5": 1.259456633829055,
+    "normalized_result": 1.0035127256885565,
+    "within_benchmark_uncertainty": true,
+    "assessment": "EXCELLENT"
+  }
+}

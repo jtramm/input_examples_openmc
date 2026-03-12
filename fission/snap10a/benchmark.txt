@@ -1,0 +1,93 @@
+===============================================================================
+SNAP-10A/2 Space Reactor Benchmark - SCA-4B Case 8490a
+===============================================================================
+
+SOURCE
+------
+Title:    "Experimental Criticality Benchmarks for SNAP 10A/2 Reactor Cores"
+          Volume I of II
+Authors:  A. W. Krass and K. L. Goluoglu
+Report:   ORNL/TM-2005/54
+Date:     April 2005
+Lab:      Oak Ridge National Laboratory (ORNL), Nuclear Criticality Safety
+
+URL:      https://info.ornl.gov/sites/publications/Files/Pub57468.pdf
+
+DESCRIPTION
+-----------
+The SNAP-10A (Systems for Nuclear Auxiliary Power) was a compact nuclear
+fission reactor developed by Atomics International (AI) in the 1960s for
+space applications. It was the first and only nuclear fission reactor to
+operate in space, launched aboard the SNAPSHOT satellite on April 3, 1965,
+producing 500 watts of electrical power via thermoelectric converters.
+
+The SCA-4B (SNAP Critical Assembly 4B) experimental program evaluated the
+criticality safety of SNAP 10A/2 reactor cores under water immersion
+scenarios. The experiments were performed in multiple phases at the AI
+facility, with configurations varying the number of fuel elements, water
+reflection, internal beryllium reflectors, and absorber sleeves.
+
+This benchmark model implements Case 8490a from Phase I of the SCA-4B
+program, which is the simplest experimental configuration:
+  - 28 SCA-4 fuel elements in the first 28 lattice positions (of 37 total)
+  - No Lucite rods in vacant positions (filled with water)
+  - No internal beryllium reflector inserts
+  - Core vessel completely flooded with water
+  - Full water reflection (9 inches in upper tank, lower tank full)
+  - Room temperature (~293.6 K)
+
+The assembly was subcritical by approximately 0.02 dollars.
+
+REACTOR CORE DESCRIPTION
+------------------------
+The reactor core consists of 37 fuel element positions arranged on a
+triangular pitch of 1.260 inches (3.2004 cm) inside a cylindrical 316
+stainless steel vessel with an inner diameter of 8.900 inches (22.606 cm).
+
+Each fuel element is a solid cylindrical rod of U-ZrH (uranium-zirconium
+hydride) fuel clad in Hastelloy N (a nickel-molybdenum alloy):
+  - Fuel rod diameter: 1.212 inches (3.07848 cm)
+  - Cladding tube OD: 1.250 inches (3.175 cm), wall thickness 0.010 in.
+  - Fuel rod length: 12.225 inches (31.0515 cm)
+  - Total element length: 12.450 inches (31.623 cm) including end caps
+  - Fuel composition: ~10 wt% U (>= 93 wt% U-235) + ~90 wt% ZrH
+  - Fuel density: 6.036 g/cm3
+  - Each element contains approximately 128.5 g U-235
+
+The gap between fuel rod and cladding is filled with a hydrogen barrier
+coating containing samarium oxide (Sm2O3) as a burnable neutron absorber.
+
+Water tanks surround the vessel for reflection:
+  - Upper tank: provides radial reflection over upper 1/3 of vessel plus
+    axial reflection above (6 inches radial water gap)
+  - Lower tank: provides radial reflection over lower 2/3 of vessel
+    (6.5 inches radial water gap)
+  - Control cap tank: small tank below for axial reflection from below
+
+REFERENCE RESULTS (from ORNL/TM-2005/54, Table 3)
+--------------------------------------------------
+Case 8490a:
+  Experimental k-eff:  0.99984 (estimated from -0.02$ subcritical)
+  MCNP5 k-eff:        1.00491 +/- 0.00069
+  Normalized result:   k_calc/k_exp = 1.0051
+  Cross sections:      ENDF/B-VI
+  Histories:           2,000,000+ active neutron histories
+  Benchmark unc.:      < 0.008 (conservative estimate)
+
+KEY REFERENCES
+--------------
+[1] NAA-SR-8490: Original SCA-4B Phase I experimental data
+[2] NAA-SR-9871: SCA-4B Phase III experimental data
+[3] ORNL/TM-2005/54: Benchmark evaluation (this model's source)
+[4] NAA-SR-8613: Hydrogen content correction for SCA-4 fuel
+
+NOTES
+-----
+- All material number densities are taken directly from Appendix B of
+  ORNL/TM-2005/54 to ensure consistency with the MCNP5 reference.
+- Geometry dimensions are from Appendix C of the same report.
+- The thermal scattering treatment for H in ZrH and Zr in ZrH is applied
+  to the fuel material, and H in H2O is applied to water.
+- The S(alpha,beta) treatment is critical for accurate results in this
+  thermal-spectrum reactor (~73% of fissions from thermal neutrons).
+===============================================================================
