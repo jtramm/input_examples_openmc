@@ -1,0 +1,39 @@
+IAEA 10 MW MTR Research Reactor Benchmark
+==========================================
+
+Source Document
+---------------
+IAEA-TECDOC-643, "Research Reactor Core Conversion Guidebook"
+Volume 1: Summary
+International Atomic Energy Agency, Vienna, 1992
+
+URL: https://www-pub.iaea.org/MTCD/Publications/PDF/te_643v1_prn.pdf
+
+Description
+-----------
+The IAEA 10 MW MTR (Material Testing Reactor) benchmark is one of the most
+widely reproduced research reactor benchmarks in the world. It was established
+as part of the Reduced Enrichment for Research and Test Reactors (RERTR) program
+to provide a standardized calculational benchmark for comparing neutronic methods
+used in research reactor analysis.
+
+The benchmark specifies an idealized pool-type 10 MW research reactor with
+plate-type fuel elements containing highly enriched uranium (HEU, 93 wt% U-235)
+in a uranium-aluminum alloy fuel meat clad with aluminum. The core consists of
+23 standard fuel elements (SFE) and 5 control fuel elements (CFE) arranged in a
+5x6 rectangular grid, surrounded by beryllium and graphite reflectors.
+
+Key specifications:
+- Thermal power: 10 MW
+- Fuel type: UAl alloy (uranium-aluminum), plate geometry
+- Enrichment: 93 wt% U-235 (HEU reference case)
+- U-235 loading: 280 g per standard fuel element
+- 23 fuel plates per standard fuel element
+- Active fuel height: 60 cm
+- Reflector: Beryllium (inner) + Graphite (outer)
+
+Reference results from multiple international participants are provided in the
+TECDOC, including k-eff, power distributions, and control rod worths.
+
+Published reference k-eff values for the fresh HEU core range from approximately
+1.05 to 1.08, depending on the code and nuclear data library used.
