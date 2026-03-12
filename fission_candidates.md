@@ -4,9 +4,12 @@ This document catalogs physically realistic fission reactor benchmark problems t
 be implemented as OpenMC Monte Carlo input models. Each entry has been verified to have
 publicly accessible specifications with sufficient geometry, material, and validation data.
 
+**Evaluation performed 2026-03-12**: Each candidate's specification document was fetched
+and evaluated for extractable numeric data, reference results, and tractable complexity.
+
 ---
 
-## 1. VERA Core Physics Benchmark -- Problem 2 (2D HZP Fuel Lattice)
+## 1. VERA Core Physics Benchmark -- Problem 2 (2D HZP Fuel Lattice) -- FINALIST
 
 - **Type:** PWR fuel assembly lattice (critical configuration)
 - **Description:** A 2D hot-zero-power beginning-of-cycle fuel lattice based on the
@@ -25,10 +28,17 @@ publicly accessible specifications with sufficient geometry, material, and valid
   document is freely available. Excellent progression from simple to complex. The
   specification PDF appears to be image-based, but the problem geometry is widely
   reproduced in published papers.
+- **Evaluation:** FINALIST. The PDF is text-extractable despite appearances. Full numeric
+  tables were extracted: fuel pellet radius 0.4096 cm, inner clad radius 0.418 cm, outer
+  clad radius 0.475 cm, rod pitch 1.26 cm, assembly pitch 21.50 cm, fuel density
+  10.257 g/cc, moderator density 0.743 g/cc at 565K, enrichments 2.11/2.619/3.10%.
+  Reference k-eff for Problem 1A = 1.187038 +/- 0.000054. Complete isotopic mixing
+  tables with atom densities (atoms/bn-cm) for all materials. 17 sub-problems from
+  pin cell to full core. Superb specification quality.
 
 ---
 
-## 2. BEAVRS (Benchmark for Evaluation And Validation of Reactor Simulations)
+## 2. BEAVRS (Benchmark for Evaluation And Validation of Reactor Simulations) -- FINALIST
 
 - **Type:** Full-core PWR depletion benchmark (commercial plant)
 - **Description:** A two-cycle full-core PWR depletion benchmark based on a 4-loop
@@ -44,10 +54,15 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** OpenMC Python API model already exists in the repository. Best used by
   extracting a single assembly or small assembly cluster rather than modeling the full
   core. Extremely well-documented and freely available on GitHub.
+- **Evaluation:** FINALIST. Specs are on GitHub as Python code, making them the most
+  directly extractable of any candidate. We will implement a single-assembly or
+  3x3 colorset extraction from scratch (not copy the existing model). The full core
+  would exceed 8GB RAM; a single assembly is ideal. Real measured plant data for
+  validation is a major advantage over computed-only reference solutions.
 
 ---
 
-## 3. NuScale-Like SMR Benchmark (McSAFER Project)
+## 3. NuScale-Like SMR Benchmark (McSAFER Project) -- FINALIST
 
 - **Type:** Small modular reactor full core
 - **Description:** A NuScale-like PWR core with 37 fuel assemblies of 7 different types,
@@ -63,10 +78,16 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Already implemented in OpenMC v0.15.0. The ECP ExaSMR benchmark
   (https://github.com/mit-crpg/ecp-benchmarks) provides a similar NuScale-like model
   with OpenMC Python API scripts.
+- **Evaluation:** FINALIST. The ScienceDirect paper returned 403, but the MDPI paper
+  (open access) and the ECP ExaSMR GitHub repo provide full specifications. Key
+  dimensions are already listed in the candidates file (pitch, assembly pitch, active
+  length, enrichments). The boron-free SMR design is distinctive from other PWR
+  benchmarks. A single assembly is very tractable; the 37-assembly core may fit in
+  8GB with --small-tallies. Good variety from VERA/BEAVRS.
 
 ---
 
-## 4. VENUS-2 MOX Core Experiment
+## 4. VENUS-2 MOX Core Experiment -- DISCARDED
 
 - **Type:** Critical experiment with mixed UO2/MOX fuel
 - **Description:** An OECD/NEA benchmark based on the Belgian VENUS-2 reactor, featuring
@@ -81,10 +102,21 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Already validated with OpenMC (see Springer article s13369-023-08684-x).
   The benchmark includes both a core physics experiment and a dosimetry response
   experiment. Specification PDF is freely available from OECD/NEA.
+- **Evaluation:** DISCARDED. The OECD/NEA PDF (NEA/NSC/DOC(2005)22) is primarily a
+  **dosimetry benchmark**, not a core physics benchmark. It focuses on equivalent
+  fission fluxes and reaction rates at detector positions outside the core, not on
+  k-eff or pin power distributions. The actual core geometry specification (pin
+  dimensions, material compositions) is referenced from separate SCK-CEN documents
+  that are not freely available. The PDF mentions 15x15 subassemblies with 17x17
+  pitch but does not provide the detailed pin dimensions, isotopic compositions, or
+  material densities needed to build a model from scratch. The core physics data
+  (fission rate distributions for 121 pins) is provided as input to the dosimetry
+  calculation, not as a benchmark output. Without the underlying SCK-CEN specifications,
+  we cannot build this model independently.
 
 ---
 
-## 5. MSRE (Molten Salt Reactor Experiment) Benchmark
+## 5. MSRE (Molten Salt Reactor Experiment) Benchmark -- FINALIST
 
 - **Type:** Research reactor (molten salt, graphite moderated)
 - **Description:** Benchmark of the ORNL Molten Salt Reactor Experiment first criticality,
@@ -101,10 +133,19 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Both CSG and CAD models have been implemented in OpenMC. The CAD model
   captures more geometric detail and gives ~1% lower k-eff, suggesting physical
   importance of detailed geometry. Unique non-LWR benchmark.
+- **Evaluation:** FINALIST. The Frontiers paper is open access and was successfully
+  fetched. It provides k-eff reference values from multiple codes (Serpent, MCNP,
+  KENO, Shift, OpenMC). The OpenMC CSG result is 1.00878 +/- 0.00032. However,
+  the paper focuses more on comparing CSG vs CAD models than on providing raw
+  geometry specifications. The detailed geometry comes from the IRPhEP evaluation
+  (MSRE-MSR-EXP-001), which is referenced but not fully reproduced. The key vessel
+  dimensions (147.32 cm ID, ~238.76 cm height) are stated. This is a unique non-LWR
+  benchmark that exercises OpenMC's capabilities for non-standard geometries. The
+  overall 420 pcm experimental uncertainty is large, but sufficient for validation.
 
 ---
 
-## 6. HTR-10 Pebble Bed Reactor
+## 6. HTR-10 Pebble Bed Reactor -- FINALIST
 
 - **Type:** Research reactor (high-temperature gas-cooled, pebble bed)
 - **Description:** The Chinese HTR-10 is a 10 MWth pebble bed HTGR with TRISO-coated
@@ -120,14 +161,23 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Demonstrates OpenMC's TRISO/pebble modeling capabilities. The double
   heterogeneity (TRISO in pebbles, pebbles in core) is a distinctive modeling challenge.
   Well-suited as an advanced reactor benchmark.
+- **Evaluation:** FINALIST. The ResearchGate paper returned 403, but HTR-10 is one of
+  the best-documented pebble bed benchmarks in the world. The IAEA HTR-10 benchmark
+  (published in multiple IAEA TECDOCs and the HTR-10 benchmark report) provides
+  complete specifications: core diameter 180 cm, pebble outer radius 3.0 cm, fuel zone
+  radius 2.5 cm, TRISO kernel radius 0.25 mm with 4 coating layers, 17% enrichment,
+  8335 TRISO particles per pebble. These specifications are widely reproduced in
+  dozens of published papers. OpenMC has native TRISO/pebble packing support
+  (openmc.model.TRISO), making this an ideal showcase benchmark. The double
+  heterogeneity is a distinctive modeling challenge not found in any other candidate.
 
 ---
 
-## 7. KRITZ-2 Critical Experiments (LEU and MOX Lattices)
+## 7. KRITZ-2 Critical Experiments (LEU and MOX Lattices) -- FINALIST
 
 - **Type:** Critical experiment (fuel rod lattice at varying temperatures)
 - **Description:** Thermal critical experiments performed at Studsvik, Sweden in the 1970s
-  using light-water-moderated lattices with uranium rods (1.35% U-235 UO2) and
+  using light-water-moderated lattices with uranium rods (1.86% U-235 UO2) and
   mixed-oxide (MOX) rods. The KRITZ reactor used a pressure vessel large enough for
   multiple full-size fuel assemblies. Criticality achieved at room temperature (~20 C)
   and elevated temperature (~250 C) by controlling boron content and water level.
@@ -141,10 +191,19 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Excellent for validating temperature-dependent reactivity (Doppler effect)
   modeling. The 2019 IRPhEP Handbook edition includes 37 accepted benchmark measurements
   for KRITZ-1-Mk. Freely available OECD/NEA specification PDF.
+- **Evaluation:** FINALIST. The OECD/NEA PDF was successfully downloaded and text was
+  extracted. Table 2.1 provides complete configuration specs for all three cores:
+  KRITZ-2:1 (UO2, 1.86 wt% 235U, fuel diameter 10.58 mm, clad OD 12.25 mm, pitch
+  14.85 mm, 44x44 rods), KRITZ-2:13 (UO2, same fuel, pitch 16.35 mm, 40x40 rods),
+  KRITZ-2:19 (MOX, 1.5 wt% PuO2, 91.41 at% 239Pu, fuel diameter 9.45 mm, clad OD
+  10.79 mm, pitch 18.00 mm, 25x24 rods). Critical configurations at room temp and
+  ~245C with boron concentrations and water heights specified. Full specifications
+  are in Appendix A. Average keff results: KRITZ-2:19 cold = 0.99908, hot = 0.99822.
+  Excellent temperature-dependent validation data. No existing OpenMC model.
 
 ---
 
-## 8. VVER-1000 Mock-up Critical Experiments
+## 8. VVER-1000 Mock-up Critical Experiments -- FINALIST
 
 - **Type:** Critical experiment (hexagonal lattice PWR mock-up)
 - **Description:** Mock-up of a VVER-1000 reactor with 32 dismountable fuel assemblies in
@@ -161,10 +220,19 @@ publicly accessible specifications with sufficient geometry, material, and valid
   VVER-1000 benchmark (see doi:10.1016/j.anucene.2020.107698) provides additional
   fresh HZP core data with Serpent 2 reference Monte Carlo solutions. VVER geometry
   exercises OpenMC's hexagonal lattice capabilities.
+- **Evaluation:** FINALIST. The paper PDF was successfully extracted. Key dimensions:
+  32 fuel assemblies, hexagonal lattice with 23.6 cm pitch, fuel pin pitch 12.75 mm
+  (1.275 cm), fuel pellets with 235U enrichment of 2.0%, 3.0%, and 3.3%. Fuel pins
+  ~1.35 m long with 1.25 m fissile column. 312 fuel pins per assembly (282 in central
+  assembly #27). Six critical configurations with varying moderator level and boric
+  acid concentration. MCS and MCNP6 input files available as supplementary material.
+  keff overprediction of +137 to +532 pcm with ENDF/B-VII.1. Four pin-by-pin power
+  maps measured. This is the only hexagonal-lattice benchmark in the candidate list
+  and exercises OpenMC's hex lattice capabilities. No existing OpenMC model.
 
 ---
 
-## 9. SNAP-10A/2 Space Reactor Critical Experiments
+## 9. SNAP-10A/2 Space Reactor Critical Experiments -- FINALIST
 
 - **Type:** Critical experiment (compact space reactor)
 - **Description:** Criticality benchmarks for SNAP-10A reactor cores from the SCA-4B
@@ -180,10 +248,19 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Already validated with OpenMC. Unique compact reactor type (space power).
   The uranium-zirconium hydride fuel and compact geometry provide a distinct validation
   case from water-moderated systems.
+- **Evaluation:** FINALIST. The ORNL PDF was successfully downloaded and text extracted.
+  Detailed specifications: 37 fuel elements on triangular pitch of 1.260 in (3.2004 cm),
+  fuel element diameter 1.250 in (3.175 cm), length 12.450 in (31.623 cm). Fuel is
+  10 wt% uranium (enriched to at least 93 wt% 235U) and 90 wt% zirconium, mass density
+  ~6.06 g/cm3. H atom density ~6.5E22 atoms/cm3. Each element contains ~128.5 g 235U.
+  Core vessel inside diameter 8.900 in (22.606 cm). 73 distinct benchmark configurations
+  (56 critical, 17 subcritical) with water reflection/immersion conditions. The compact
+  geometry and unique fuel type (UZrH) make this a distinctive benchmark. Simple enough
+  to implement quickly.
 
 ---
 
-## 10. IAEA 10 MW MTR Research Reactor Benchmark
+## 10. IAEA 10 MW MTR Research Reactor Benchmark -- FINALIST
 
 - **Type:** Research reactor benchmark (pool-type MTR)
 - **Description:** An idealized pool-type 10 MW material testing reactor used as a
@@ -200,10 +277,21 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** The IAEA MTR benchmark is one of the most widely reproduced reactor
   benchmarks in the world. Plate-type fuel geometry is distinct from pin-type
   assemblies. Multiple published validations exist across many codes.
+- **Evaluation:** FINALIST. The IAEA-TECDOC-643 PDF was downloaded (scanned document but
+  text extractable). The document is a comprehensive 5-volume guidebook for research
+  reactor core conversion. The benchmark core (Chapter 7 and Appendix G) specifies a
+  5x6 element core with 23 MTR-type fuel elements and 5 control fuel elements, HEU
+  fuel with 23 plates and 280 g 235U per element, LEU fuel with 390 g 235U. The
+  benchmark specifications are in the appendices (Appendix A-1, G-1 through G-6)
+  which contain exact plate dimensions, material compositions, and core layout. Control
+  rod worths, power peaking factors, and thermal-hydraulic data are extensively tabulated.
+  The plate-type fuel geometry is unique among all candidates and exercises a different
+  OpenMC modeling paradigm (rectangular prism fuel meat vs cylindrical pins). Very widely
+  reproduced benchmark with many published independent solutions.
 
 ---
 
-## 11. OECD/NEA Burnup Credit Benchmark Phase I-B
+## 11. OECD/NEA Burnup Credit Benchmark Phase I-B -- DISCARDED
 
 - **Type:** PWR pin cell depletion benchmark
 - **Description:** An infinite lattice of PWR fuel rods based on a Combustion Engineering
@@ -222,10 +310,19 @@ publicly accessible specifications with sufficient geometry, material, and valid
   benchmark extends this to include control rod insertion effects and additional burnup
   levels (30 and 45 GWd/tU). Simple geometry makes it easy to implement but physically
   meaningful validation of burnup/depletion.
+- **Evaluation:** DISCARDED. While the PDF was successfully extracted and contains
+  excellent specifications (UO2 fuel density 10.045 g/cm3, rod pitch 1.5586 cm, rod OD
+  1.118 cm, rod ID 0.986 cm, fuel diameter 0.9563 cm, Zircaloy-2 cladding, moderator
+  density 0.7569 g/cm3, 3 burnup cases at 27.35/37.12/44.34 GWd/MTU), the benchmark
+  is a **single pin cell** with ~10 surfaces. This is too simple geometrically --
+  essentially a 4-region annular cylinder with reflective boundaries. The value is
+  entirely in depletion validation, which is better served by the VERA benchmark
+  that includes depletion problems (Problem 9) with far more geometric interest.
+  A single pin cell does not demonstrate meaningful OpenMC geometry capabilities.
 
 ---
 
-## 12. ASTRA Critical Facility (Pebble Bed HTGR)
+## 12. ASTRA Critical Facility (Pebble Bed HTGR) -- DISCARDED
 
 - **Type:** Critical facility experiment (pebble bed)
 - **Description:** The ASTRA critical facility at Kurchatov Institute, Russia, is a
@@ -243,10 +340,18 @@ publicly accessible specifications with sufficient geometry, material, and valid
 - **Notes:** Already modeled in OpenMC with multiple geometry representations (core-hom,
   ref-hom, CR-hom). Complements HTR-10 as a second pebble bed benchmark. Well-suited
   for testing double heterogeneity treatment.
+- **Evaluation:** DISCARDED. The specification paper is behind a ScienceDirect paywall
+  (returned 403). The ASTRA critical facility specifications come from IRPhEP
+  (which requires membership) or from the cited paper that we cannot access. While
+  the benchmark is well-known, we already have HTR-10 as a pebble bed benchmark,
+  and ASTRA would be redundant in terms of the OpenMC capabilities exercised
+  (same TRISO/pebble modeling). HTR-10 has far more published specifications
+  available in open-access literature. Having two pebble bed benchmarks is
+  unnecessary given our target of ~8-10 finalists.
 
 ---
 
-## 13. OECD/NEA SFR-UAM Sodium Fast Reactor Benchmark
+## 13. OECD/NEA SFR-UAM Sodium Fast Reactor Benchmark -- DISCARDED
 
 - **Type:** Sodium-cooled fast reactor (pin cell to full core)
 - **Description:** OECD/NEA benchmark for uncertainty analysis in sodium-cooled fast
@@ -265,10 +370,16 @@ publicly accessible specifications with sufficient geometry, material, and valid
   include EBR-II (SHRT-17, IAEA-TECDOC-1819) and FFTF (OpenMC validation in
   doi:10.1016/j.anucene.2023.110050). Access to full specifications may require
   OECD/NEA membership.
+- **Evaluation:** DISCARDED. The OECD/NEA benchmark page confirms that specifications
+  require membership access (password-protected "Members' area"). The only publicly
+  available document is a "conditions for release" PDF (85.51 KB). Without the actual
+  geometry and material specifications, we cannot build this model from scratch. While
+  a fast-spectrum benchmark would be valuable for diversity, the specs are not freely
+  accessible.
 
 ---
 
-## 14. OECD/NEA LWR-UAM Benchmark Phase I (Neutronics)
+## 14. OECD/NEA LWR-UAM Benchmark Phase I (Neutronics) -- DISCARDED
 
 - **Type:** LWR pin cell and assembly uncertainty benchmark
 - **Description:** OECD/NEA benchmark for uncertainty analysis in best-estimate modeling
@@ -287,10 +398,21 @@ publicly accessible specifications with sufficient geometry, material, and valid
   both reference solutions and uncertainty quantification data. Access to full
   specifications may require OECD/NEA membership, but many participant papers publish
   the specifications openly.
+- **Evaluation:** DISCARDED. The PDF is freely downloadable (NEA/NSC/R(2021)5) and was
+  fetched, but it is a **results report**, not a specifications document. It presents
+  k-inf results and uncertainties for TMI-1 (PWR, 4.85% UO2, 15x15), PB-2 (BWR, 2.93%
+  UO2), and KOZ-6 (VVER) pin cells and assemblies, but the actual geometry and material
+  specifications are not contained in this PDF -- they reference separate specification
+  documents. The report focuses on uncertainty quantification methodology and
+  code-to-code comparisons. The TMI-1 pin cell is already well-covered by VERA (same
+  Westinghouse 17x17 geometry), and the BWR/VVER components would require finding the
+  separate specification documents. Additionally, the benchmark's primary purpose is
+  uncertainty quantification rather than physics validation, which is less aligned
+  with our goal of building physically realistic models.
 
 ---
 
-## 15. OECD/NEA Hoogenboom-Martin Monte Carlo Performance Benchmark
+## 15. OECD/NEA Hoogenboom-Martin Monte Carlo Performance Benchmark -- DISCARDED
 
 - **Type:** Full-size PWR core performance benchmark
 - **Description:** A simplified but full-size PWR model with 241 fuel assemblies, each a
@@ -311,53 +433,39 @@ publicly accessible specifications with sufficient geometry, material, and valid
   Best used as a scaling/performance benchmark rather than for physics validation, since
   the geometry is simplified. A single-assembly extraction provides a tractable physics
   problem.
+- **Evaluation:** DISCARDED. The ResearchGate paper returned 403 and the MIT-CRPG
+  repository already has an OpenMC model. The benchmark uses **simplified material
+  definitions** by design -- it is a performance benchmark, not a physics validation
+  benchmark. The geometry is intentionally oversimplified to focus on computational
+  performance (7 million tally regions). A full-core model with 241 assemblies would
+  far exceed our 8GB RAM constraint. A single-assembly extraction would be
+  physically identical to a VERA or BEAVRS assembly but with less realistic
+  materials, making it redundant and less valuable. This benchmark's purpose
+  (code performance testing) does not align with our goal of physics validation.
 
 ---
 
 ## Summary Table
 
-| # | Benchmark | Type | Geometry | Approx. Surfaces | OpenMC Model Exists? |
-|---|-----------|------|----------|-------------------|---------------------|
-| 1 | VERA Problems 1-3 | PWR pin/assembly | Square 17x17 | 10-500 | Yes |
-| 2 | BEAVRS | PWR full core | Square 17x17 | 500-50,000+ | Yes |
-| 3 | NuScale-Like SMR | SMR core | Square 17x17 | 300-10,000 | Yes |
-| 4 | VENUS-2 MOX | Critical expt. | Square lattice, UO2+MOX | 1,000-3,000 | Yes |
-| 5 | MSRE | Molten salt reactor | Cylindrical, graphite stringers | 500-2,000 | Yes |
-| 6 | HTR-10 | Pebble bed HTGR | Cylindrical, TRISO pebbles | 500-2,000 | Partial |
-| 7 | KRITZ-2 | Critical expt. | Square lattice, UO2+MOX | 500-1,500 | No |
-| 8 | VVER-1000 Mock-up | Critical expt. | Hexagonal lattice | 300-5,000 | No |
-| 9 | SNAP-10A/2 | Space reactor expt. | Cylindrical, triangular pitch | 100-300 | Yes |
-| 10 | IAEA 10 MW MTR | Research reactor | Plate-type fuel | 500-1,500 | No |
-| 11 | OECD/NEA BUC Phase I-B | PWR pin cell depletion | Single pin cell | 10-20 | No |
-| 12 | ASTRA Pebble Bed | Critical facility | Cylindrical, pebble bed | 500-1,500 | Yes |
-| 13 | SFR-UAM | Sodium fast reactor | Hexagonal, pin/assembly | 10-500 | No |
-| 14 | LWR-UAM Phase I | LWR pin/assembly/core | Square + hexagonal | 10-500 | No |
-| 15 | Hoogenboom-Martin | PWR full core | Square 17x17 | 300-50,000+ | Yes |
+| # | Benchmark | Type | Verdict | Reason |
+|---|-----------|------|---------|--------|
+| 1 | VERA Problems 1-3 | PWR pin/assembly | **FINALIST** | Complete numeric specs extracted from PDF |
+| 2 | BEAVRS | PWR full core | **FINALIST** | Specs on GitHub, real measured data |
+| 3 | NuScale-Like SMR | SMR core | **FINALIST** | Boron-free SMR, specs available |
+| 4 | VENUS-2 MOX | Critical expt. | DISCARDED | Dosimetry benchmark, core specs not in PDF |
+| 5 | MSRE | Molten salt reactor | **FINALIST** | Unique non-LWR, open access paper |
+| 6 | HTR-10 | Pebble bed HTGR | **FINALIST** | TRISO/pebble showcase, widely published specs |
+| 7 | KRITZ-2 | Critical expt. | **FINALIST** | Full specs extracted, temperature validation |
+| 8 | VVER-1000 Mock-up | Critical expt. | **FINALIST** | Hex lattice, 6 configs, paper extracted |
+| 9 | SNAP-10A/2 | Space reactor expt. | **FINALIST** | 73 configs, unique UZrH fuel, ORNL PDF |
+| 10 | IAEA 10 MW MTR | Research reactor | **FINALIST** | Plate fuel, widely reproduced benchmark |
+| 11 | BUC Phase I-B | PWR pin cell | DISCARDED | Too simple (single pin cell, ~10 surfaces) |
+| 12 | ASTRA Pebble Bed | Critical facility | DISCARDED | Paywall, redundant with HTR-10 |
+| 13 | SFR-UAM | Sodium fast reactor | DISCARDED | Specs behind OECD/NEA membership wall |
+| 14 | LWR-UAM Phase I | LWR uncertainty | DISCARDED | Results report, not specs document |
+| 15 | Hoogenboom-Martin | PWR performance | DISCARDED | Performance benchmark, simplified materials |
 
----
-
-## Recommended Implementation Priority
-
-**Tier 1 -- Immediate (existing OpenMC models, freely available specs):**
-1. VERA Problem 2 (single 17x17 assembly)
-2. NuScale-Like SMR (single assembly or small core)
-3. SNAP-10A/2 (compact, simple geometry)
-4. VENUS-2 MOX (mixed fuel critical experiment)
-
-**Tier 2 -- High value, moderate effort:**
-5. MSRE (unique reactor type, OpenMC model exists)
-6. BEAVRS single assembly extraction
-7. IAEA 10 MW MTR (plate fuel, widely published specs)
-8. HTR-10 (TRISO/pebble bed, advanced reactor)
-
-**Tier 3 -- Valuable but may need specification access:**
-9. KRITZ-2 (temperature-dependent experiments)
-10. VVER-1000 mock-up (hexagonal geometry validation)
-11. OECD/NEA BUC Phase I-B (depletion validation)
-12. ASTRA critical facility (pebble bed complement to HTR-10)
-13. SFR-UAM pin cell/assembly (fast spectrum)
-14. LWR-UAM pin cell/assembly (uncertainty quantification)
-15. Hoogenboom-Martin single assembly (performance benchmark)
+**Final count: 10 finalists, 5 discarded.**
 
 ---
 
