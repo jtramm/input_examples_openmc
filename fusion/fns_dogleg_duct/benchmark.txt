@@ -1,0 +1,49 @@
+FNS Dogleg Duct Streaming Experiment
+======================================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+Entry:       FNS Dogleg Duct Streaming Experiment
+Facility:    Fusion Neutronics Source (FNS), JAEA, Tokai-mura, Japan
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/fns_duct/fnsstr-a.htm
+
+Description:
+  A large iron slab assembly (1700 x 1400 x 1800 mm) contains a doubly-bent
+  (dogleg) duct with a 300 x 300 mm square cross-section. The duct has three
+  legs connected at right angles: a first horizontal leg (1150 mm) along the
+  beam direction, a vertical leg (600 mm) perpendicular to the beam, and a
+  second horizontal leg (650 mm) parallel to but offset from the first.
+
+  14 MeV D-T neutrons from the FNS facility enter the duct through its
+  entrance on the front face of the iron assembly. The experiment studies
+  neutron streaming through the duct -- how neutrons navigate the right-angle
+  bends by scattering off the iron walls (albedo effect) and how the dogleg
+  geometry attenuates the streaming radiation compared to a straight duct.
+
+  This is a challenging benchmark for radiation transport codes because it
+  combines streaming (void transport), deep penetration (through iron), and
+  wall-scattering physics at the duct bends. Statistical convergence is
+  difficult as very few source particles navigate both right-angle bends.
+
+Geometry:
+  - Iron assembly: 1700 x 1400 x 1800 mm
+  - Duct cross-section: 300 x 300 mm (square)
+  - 1st horizontal leg: 1150 mm along beam direction
+  - Vertical leg: 600 mm perpendicular
+  - 2nd horizontal leg: 650 mm parallel to first, offset vertically
+  - Right-angle connections between all legs
+
+Material:
+  - Natural iron, density 7.874 g/cm3
+
+Measurements:
+  - Neutron spectra at 4 positions within and beyond the duct
+  - NE213 scintillator (neutrons > 2 MeV)
+  - Activation dosimetry: Nb-93(n,2n), In-115(n,n'), Au-197(n,g)
+
+Key physics:
+  - Line-of-sight streaming in the first leg
+  - Wall-scattering (albedo) at both right-angle bends
+  - Spectral softening through successive scatterings
+  - Competition between streaming through duct and penetration through iron
