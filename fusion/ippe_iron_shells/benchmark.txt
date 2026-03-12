@@ -1,0 +1,52 @@
+================================================================================
+IPPE Iron Spherical Shell Transmission Benchmark
+================================================================================
+
+Source:
+    SINBAD Database (Shielding Integral Benchmark Archive and Database)
+    OECD Nuclear Energy Agency (NEA)
+
+URL:
+    https://www.oecd-nea.org/science/wprs/shielding/sinbad/ippe-fe/
+    https://www.oecd-nea.org/science/wprs/shielding/sinbad/ippe-fe/ippe_fe-a.htm
+
+Description:
+    Neutron transmission measurements through five spherical iron shells
+    of varying size and thickness. A 14.1 MeV D-T neutron source (from a
+    Cockroft-Walton KG-0.3 generator) was placed at the center of each
+    shell, and the neutron leakage spectrum was measured with a fast
+    scintillator detector (paraterphenyl crystal, 5 cm diameter x 5 cm
+    height) at a flight path of 6.8 m. The detector was positioned at 8
+    degrees relative to the beam direction.
+
+    The experiment was performed at the Institute of Physics and Power
+    Engineering (IPPE), Obninsk, Russia, between 1989 and 1995.
+
+Shell Configurations:
+    Shell 1: Inner radius =  4.5 cm, thickness =  2.5 cm, outer radius =  7.0 cm
+    Shell 2: Inner radius = 12.0 cm, thickness =  7.5 cm, outer radius = 19.5 cm
+    Shell 3: Inner radius = 12.0 cm, thickness = 10.0 cm, outer radius = 22.0 cm
+    Shell 4: Inner radius = 20.0 cm, thickness = 18.1 cm, outer radius = 38.1 cm
+    Shell 5: Inner radius = 30.0 cm, thickness = 28.0 cm, outer radius = 58.0 cm
+
+Source Characteristics:
+    - Deuteron kinetic energy: 280 keV maximum
+    - Target: Titanium-Tritide (Ti-T) on 0.8 mm copper backing
+    - Target diameter: 11 mm, beam spot: 5 mm
+    - Neutron energy: 14.1 MeV (D-T fusion)
+    - Ion pulse width: 2.5 ns
+    - Repetition rate: multiples of 200 ns (800 ns standard)
+    - Mean beam current: 1 microampere
+
+Material:
+    Pure iron (Fe), density ~7.874 g/cm^3
+    Atom densities calculated from measured sphere weights.
+
+Measured Quantities:
+    Neutron leakage spectra from 50 keV to 15 MeV for all 5 shells.
+    Time-of-flight technique used for energy determination.
+
+Reference Calculations:
+    MCNP-4C calculations are available in the SINBAD database for
+    comparison with the experimental data.
+================================================================================
