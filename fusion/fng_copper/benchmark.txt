@@ -1,0 +1,50 @@
+FNG Copper Benchmark: Slab Assembly Activation Measurements
+=============================================================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+             OECD Nuclear Energy Agency
+Facility:    Frascati Neutron Generator (FNG), ENEA Frascati, Italy
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/
+
+Description:
+  A rectangular assembly of seven OFHC (Oxygen-Free High-Conductivity)
+  copper plates, each approximately 10 cm thick and 60 x 60 cm in cross-
+  section, was irradiated by 14 MeV D-T neutrons at the FNG facility.
+  Activation foils of seven different types were placed between the plates
+  at seven depth positions to measure neutron reaction rate profiles through
+  the copper assembly.
+
+  The experiment is part of a series of benchmark experiments performed at
+  FNG for validating nuclear data and transport codes relevant to fusion
+  reactor shielding and activation calculations. Copper is a critical
+  material for ITER first-wall heat sinks, divertor cooling structures,
+  and RF antenna components.
+
+Geometry:
+  - Rectangular assembly: 60 x 60 x ~70 cm (7 plates x 10 cm each)
+  - OFHC copper plates stacked along beam axis
+  - D-T point source at 5.3 cm from front face
+
+Measurements:
+  - Activation foil reaction rates at 7 depth positions:
+    Nb-93(n,2n), Al-27(n,alpha), Ni-58(n,p), In-115(n,n'),
+    Au-197(n,2n), W-186(n,gamma), Au-197(n,gamma)
+  - Reaction rate profiles vs depth for each foil type
+  - C/E ratios computed against MCNP reference calculations
+
+Reference calculations:
+  - MCNP with FENDL and ENDF/B libraries
+  - Validated with OpenMC in published studies
+
+Key references:
+  M. Angelone, M. Pillon, et al., "Neutron Activation Measurements in
+  Copper for the Validation of Nuclear Data for Fusion Applications,"
+  Fusion Eng. Des., 2002.
+
+  P. Batistoni et al., "Analysis of Copper Benchmark Experiment at FNG
+  with the European Activation System (EASY)," Fusion Eng. Des., 2001.
+
+  SINBAD Compilation, "FNG Copper Benchmark Experiment,"
+  NEA/NSC/DOC, OECD Nuclear Energy Agency.
