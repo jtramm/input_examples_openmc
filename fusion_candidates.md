@@ -4,9 +4,13 @@ This document catalogs fusion neutronics benchmark problems that could be implem
 as OpenMC Monte Carlo input models. All candidates have detailed geometry/material
 specifications and reference experimental or computational results for validation.
 
+Each candidate has been evaluated against specification documents and tagged as
+**FINALIST** or **DISCARDED** based on: availability of geometry specs, material
+compositions, MCNP inputs, experimental reference data, and tractable complexity.
+
 ---
 
-## 1. FNG-ITER Bulk Shield Mock-up
+## 1. FNG-ITER Bulk Shield Mock-up -- FINALIST
 
 - **Type:** Blanket/shield mock-up experiment
 - **Description:** A 94 cm thick mock-up of the ITER inboard shielding (first wall,
@@ -25,10 +29,14 @@ specifications and reference experimental or computational results for validatio
 - **Complexity:** Moderate -- slab geometry with multiple material layers; ~100 cells
 - **Notes:** One of the most widely used SINBAD fusion benchmarks. Already used for
   TRIPOLI-4 vs MCNP numerical benchmarking. Well-documented in SINBAD.
+- **Evaluation:** FINALIST. SINBAD page provides 14 foil positions, 17 TLD positions,
+  source-to-mockup distance (5.3 cm), 60-degree source aperture, and MCNP-4A input.
+  Material compositions (Cu, SS316, Perspex) are standard. Excellent experimental
+  data with multiple reaction types. One of the most-cited fusion shielding benchmarks.
 
 ---
 
-## 2. FNG-ITER Streaming Experiment
+## 2. FNG-ITER Streaming Experiment -- FINALIST
 
 - **Type:** Neutron streaming/shielding experiment
 - **Description:** A neutron streaming benchmark through an ITER-like shielding
@@ -49,10 +57,15 @@ specifications and reference experimental or computational results for validatio
 - **Notes:** Already validated with OpenMC (published 2024 in Fusion Science and
   Technology). Excellent candidate since OpenMC results already exist for comparison.
   Ideal test for weight windows / random ray solver.
+- **Evaluation:** FINALIST. Exceptionally well-documented: 6 MCNP input files
+  (mcnpfoil.inp, mcnp_nh.inp, mcnp_hss.inp, mcnp_hcu.inp, mcnp_tld.inp),
+  FORTRAN source routine. Channel diameter 28 mm, cavity 52x148x48 mm, rear coil
+  block 47x47 cm. Foil positions at 23 depths. Already validated with OpenMC.
+  Best candidate for weight window / variance reduction testing.
 
 ---
 
-## 3. FNG HCPB Tritium Breeder Module Mock-up
+## 3. FNG HCPB Tritium Breeder Module Mock-up -- FINALIST
 
 - **Type:** Breeding blanket mock-up experiment
 - **Description:** A mock-up of the Helium-Cooled Pebble Bed (HCPB) breeding blanket
@@ -72,10 +85,15 @@ specifications and reference experimental or computational results for validatio
   compositions
 - **Notes:** Ranked as benchmark-quality experiment. Already converted to Serpent and
   OpenMC inputs in published benchmarking studies. Key for tritium breeding validation.
+- **Evaluation:** FINALIST. SINBAD page provides exact box dimensions (31x29x30.9 cm
+  external, 0.5 cm wall), rear box (31x14.8x30.9 cm), breeder layer thickness
+  (1.2 cm), Be density (1.85 g/cm3), Li2CO3 densities (1.123 and 0.9413 g/cm3),
+  Li isotopics (7.5 at% Li-6, 92.5 at% Li-7). MCNP-4C model (84 KB) available.
+  16 tritium production measurement positions. Key for breeding blanket validation.
 
 ---
 
-## 4. FNG Copper Benchmark
+## 4. FNG Copper Benchmark -- FINALIST
 
 - **Type:** Material shielding experiment
 - **Description:** A pure copper assembly (60x60x69.9 cm, seven 10-cm plates)
@@ -93,10 +111,15 @@ specifications and reference experimental or computational results for validatio
 - **Complexity:** Low-moderate -- simple slab geometry of pure material
 - **Notes:** Already converted to OpenMC and Serpent inputs in published benchmarking
   studies. One of the newer SINBAD entries with modern uncertainty quantification.
+- **Evaluation:** FINALIST. Although the primary paper is behind the ScienceDirect
+  paywall (403 error on fetch), this experiment is entered into SINBAD with full
+  and simplified MCNP models. Already converted to OpenMC in published studies,
+  so exact geometry/material data is available through the openmc_fusion_benchmarks
+  repository. Simple 7-plate pure copper slab -- trivial geometry with 7 foil types.
 
 ---
 
-## 5. FNG Tungsten Experiment
+## 5. FNG Tungsten Experiment -- FINALIST
 
 - **Type:** Material shielding experiment
 - **Description:** Measurements of neutron reaction rates and gamma heating in a
@@ -111,10 +134,15 @@ specifications and reference experimental or computational results for validatio
 - **Complexity:** Low-moderate -- slab/block geometry
 - **Notes:** Tungsten cross-section validation is critical for ITER/DEMO divertor
   design. Also available as FNG/TUD variant with spectral measurements.
+- **Evaluation:** FINALIST. SINBAD page provides excellent detail: DENSIMET-176
+  (92.3% W, 2.6% Fe, 4.2% Ni) and DENSIMET-180 (95.0% W, 1.6% Fe, 3.4% Ni)
+  compositions, block dimensions (42-47x46.85x49 cm), source distance 5.3 cm,
+  TLD-300 dosimeter specs. Four 3D MCNP input files (FeIn.mcp, NbNiAu.mcp,
+  ZrAlMn.mcp, mcnp_tld.inp). Nine different foil reactions measured at 4 depths.
 
 ---
 
-## 6. FNG-ITER Dose Rate Experiment
+## 6. FNG-ITER Dose Rate Experiment -- DISCARDED
 
 - **Type:** Shutdown dose rate experiment
 - **Description:** A SS316/Perspex assembly (100x100 cm front, 71.83 cm thick) with a
@@ -133,10 +161,18 @@ specifications and reference experimental or computational results for validatio
   for shutdown dose
 - **Notes:** Tests activation/shutdown dose workflow (requires coupling OpenMC with an
   inventory code like FISPACT or OpenMC depletion). Already benchmarked with OpenMC.
+- **Evaluation:** DISCARDED. While the geometry specs are excellent (100x100 cm front,
+  71.83 cm thick, cavity 119.8x150x126 mm, channel 27.4 mm ID), this benchmark
+  requires a two-step R2S (Rigorous 2-Step) shutdown dose rate calculation coupling
+  OpenMC neutron transport with an activation/inventory code (FISPACT). This is not
+  a straightforward fixed-source transport problem -- the primary validation quantity
+  is dose rate vs. cooling time, which requires depletion/activation capabilities
+  beyond standard OpenMC fixed-source transport. Better tackled later after simpler
+  benchmarks are established.
 
 ---
 
-## 7. FNS Clean Benchmark: Tungsten, Vanadium, and Beryllium Assemblies
+## 7. FNS Clean Benchmark: Tungsten, Vanadium, and Beryllium Assemblies -- FINALIST
 
 - **Type:** Material neutronics experiments
 - **Description:** Three clean benchmark experiments performed at the JAEA Fusion
@@ -159,10 +195,17 @@ specifications and reference experimental or computational results for validatio
 - **Notes:** Already fully validated with OpenMC v0.14.1-dev (published 2024). These
   are excellent first benchmarks due to simple geometry and comprehensive data.
   Available in the openmc_fusion_benchmarks GitHub repository.
+- **Evaluation:** FINALIST. SINBAD pages provide detailed specs: W cylinder
+  (629 mm diameter, 507 mm height, bricks 50.7-50.8 mm thick), V cube
+  (25.4 cm side with 50.8 mm graphite reflector), source at 200 mm from assembly.
+  Detector positions at 0, 76, 228, 380 mm depths. MCNP input files (mcnp-w.inp,
+  mcnp-v.inp). D-T source at 350 keV deuteron beam, ~3.7E11 Bq tritium target.
+  Five dosimetry reactions. Already validated with OpenMC -- highest-confidence
+  starting point.
 
 ---
 
-## 8. FNS Dogleg Duct Streaming Experiment
+## 8. FNS Dogleg Duct Streaming Experiment -- FINALIST
 
 - **Type:** Neutron streaming experiment
 - **Description:** An iron slab assembly (1700x1400x1800 mm) with a doubly bent
@@ -180,10 +223,15 @@ specifications and reference experimental or computational results for validatio
   benefits from weight windows
 - **Notes:** Important for validating variance reduction techniques. Being implemented
   in the openmc_fusion_benchmarks repository.
+- **Evaluation:** FINALIST. SINBAD page provides iron assembly dimensions
+  (1700x1400x1800 mm), duct cross-section (300x300 mm), three duct leg lengths
+  (1150, 600, 650 mm), NE213 detector (40 mm sphere), source yield ~4E12 n/s.
+  Two complete MCNP input files (mcnp-F2.inp, mcnp-J33.inp). Four measurement
+  positions with spectra and dosimetry. Excellent for weight window validation.
 
 ---
 
-## 9. KANT Beryllium Spherical Shell Experiment
+## 9. KANT Beryllium Spherical Shell Experiment -- FINALIST
 
 - **Type:** Material neutron multiplication experiment
 - **Description:** The Karlsruhe Neutron Transmission (KANT) experiment measured
@@ -201,10 +249,16 @@ specifications and reference experimental or computational results for validatio
 - **Complexity:** Low -- spherical shell geometry, single material
 - **Notes:** Critical for validating beryllium neutron multiplication data used in
   breeding blanket design. Analyzed with TRIPOLI-4, MCNP, and other codes.
+- **Evaluation:** FINALIST. SINBAD page provides shell geometry (10 cm inner
+  diameter, thicknesses 5/10/17 cm, outer diameter up to 44 cm), deuteron beam
+  at 150 keV, detector at 60 degrees. MCNP model (kantmcnp.i) modifiable for all
+  three thicknesses. 178-group tabulated spectra in three files. Simple spherical
+  geometry with single material -- easy to build. Critical for Be neutron
+  multiplication validation in breeding blanket design.
 
 ---
 
-## 10. OKTAVIAN Sphere Experiments (Iron, Nickel, Aluminium, Silicon, Tungsten, Manganese)
+## 10. OKTAVIAN Sphere Experiments (Iron, Nickel, Aluminium, Silicon, Tungsten, Manganese) -- FINALIST
 
 - **Type:** Material leakage spectra experiments
 - **Description:** A series of sphere experiments performed at Osaka University's
@@ -224,10 +278,15 @@ specifications and reference experimental or computational results for validatio
 - **Notes:** Simplest possible fusion benchmarks. Ideal as introductory/validation
   models. Already implemented in the openmc_fusion_benchmarks repository with
   postprocessing notebooks.
+- **Evaluation:** FINALIST. SINBAD pages provide Fe sphere radius (50.32 cm, 98.69%
+  Fe), Ni sphere diameter (32 cm, 99.63% Ni purity), 14.1 MeV source from 245 keV
+  Cockcroft-Walton accelerator, detector at 9.5 m. MCNP models available (FE2d.i,
+  NI2d.i). Already implemented in openmc_fusion_benchmarks. Simplest possible
+  geometry -- ideal starting point for validating the OpenMC model-building workflow.
 
 ---
 
-## 11. IPPE Iron Spherical Shell Transmission Experiment
+## 11. IPPE Iron Spherical Shell Transmission Experiment -- FINALIST
 
 - **Type:** Material transmission experiment
 - **Description:** Neutron transmission measurements through five spherical iron
@@ -244,10 +303,16 @@ specifications and reference experimental or computational results for validatio
 - **Complexity:** Very low -- spherical shell geometry, single material, 5 variants
 - **Notes:** Provides a systematic thickness study allowing validation of deep
   penetration transport. Complementary to OKTAVIAN single-sphere experiments.
+- **Evaluation:** FINALIST. SINBAD page provides all five shell geometries:
+  Shell 1 (R=4.5 cm, t=2.5 cm), Shell 2 (R=12 cm, t=7.5 cm), Shell 3 (R=12 cm,
+  t=10 cm), Shell 4 (R=20 cm, t=18.1 cm), Shell 5 (R=30 cm, t=28 cm). D-T source
+  at 280 keV max deuteron energy, 5 mm beam spot, 2.5 ns pulse width, detector at
+  6.8 m at 8 degrees. Five MCNP-4C input files (mcnp_fe1-5.inp). Systematic
+  thickness variation ideal for deep-penetration transport validation.
 
 ---
 
-## 12. FNG WCLL (Water-Cooled Lithium Lead) Mock-up Experiment
+## 12. FNG WCLL (Water-Cooled Lithium Lead) Mock-up Experiment -- DISCARDED
 
 - **Type:** Breeding blanket mock-up experiment
 - **Description:** A mock-up of the Water-Cooled Lithium Lead (WCLL) breeding blanket
@@ -264,13 +329,17 @@ specifications and reference experimental or computational results for validatio
 - **Data files:** Detailed MCNP model; sensitivity/uncertainty data
 - **Complexity:** Moderate -- multi-material layered assembly with realistic blanket
   materials (LiPb, EUROFER, water-equivalent)
-- **Complexity:** Moderate -- multi-material layered geometry
 - **Notes:** Most recent FNG blanket experiment (2019). Tests the WCLL concept which
   is one of two EU DEMO blanket candidates. Excellent for tritium breeding validation.
+- **Evaluation:** DISCARDED. The specification is a ScienceDirect journal article that
+  returned HTTP 403 (paywall). No SINBAD entry with freely accessible geometry/material
+  specs was found. Without access to the paper, we cannot extract the exact LiPb brick
+  dimensions, EUROFER plate thicknesses, or material compositions needed to build an
+  OpenMC model. Could be revisited if the paper or SINBAD entry becomes accessible.
 
 ---
 
-## 13. EU DEMO HCPB Breeding Blanket Sector Model
+## 13. EU DEMO HCPB Breeding Blanket Sector Model -- DISCARDED
 
 - **Type:** Computational tokamak sector benchmark
 - **Description:** A 11.25-degree toroidal sector model of the EU DEMO reactor with
@@ -290,10 +359,16 @@ specifications and reference experimental or computational results for validatio
 - **Notes:** Not a physical experiment but a computational benchmark between codes.
   Represents a physically realistic reactor design. May require significant effort
   to build from scratch in OpenMC, but the csg2csg conversion tool could help.
+- **Evaluation:** DISCARDED. Three disqualifying factors: (1) The specification paper
+  is behind the ScienceDirect paywall (HTTP 403). (2) This is a computational-only
+  benchmark with no experimental measurements for validation. (3) The complexity is
+  very high -- a full tokamak sector with heterogeneous blanket modules would require
+  thousands of surfaces and cells, far exceeding tractable complexity for initial
+  benchmark implementation.
 
 ---
 
-## 14. TUD Iron Slab Experiment
+## 14. TUD Iron Slab Experiment -- FINALIST
 
 - **Type:** Material shielding experiment
 - **Description:** Spectral neutron and photon flux measurements from iron assemblies
@@ -309,10 +384,16 @@ specifications and reference experimental or computational results for validatio
 - **Complexity:** Low -- slab geometry, single material
 - **Notes:** Widely used as one of three SINBAD fusion deep-penetration benchmarks for
   Monte Carlo code validation (alongside FNG bulk shield and IPPE iron).
+- **Evaluation:** FINALIST. SINBAD page provides iron slab dimensions (100x100 cm
+  front, 30 cm thick, building units 20x10x5 cm), three gap configurations (A0
+  solid, A1 gap at 10 cm, A2 gap at 20 cm), source-to-slab distance 19 cm,
+  slab-to-detector 300 cm, 74-degree beam angle. MCNP-4A input (MCNP.DAT, 11.8 KB).
+  NE213 scintillator plus three H-proportional counters plus stilbene detector.
+  17 detailed data tables in TUFE-EXP.HTM. Simple geometry, comprehensive spectral data.
 
 ---
 
-## 15. Juelich Lithium Metal Blanket Experiment
+## 15. Juelich Lithium Metal Blanket Experiment -- DISCARDED
 
 - **Type:** Breeding blanket experiment
 - **Description:** Blanket neutronics experiments performed at Institut fuer
@@ -332,10 +413,17 @@ specifications and reference experimental or computational results for validatio
 - **Notes:** Tests the fundamental physics of tritium breeding: lithium breeding,
   beryllium multiplication, and graphite reflection. Four configurations from a
   single facility provide systematic validation.
+- **Evaluation:** DISCARDED. The SINBAD page provides only limited geometry data
+  (radial positions at 0.055-0.689 m). Critical limitation: "original Morse input
+  is not available" and MCNP input details are only in a JPG figure (Figure 7) that
+  cannot be parsed for exact dimensions. Without machine-readable geometry specs or
+  MCNP input files, building an accurate model would require manual extraction from
+  figures -- error-prone and time-consuming. The experiment dates from 1976-1984
+  with less precise documentation than modern FNG/FNS experiments.
 
 ---
 
-## 16. ORNL 14 MeV SS/Borated Polyethylene Slab Experiment
+## 16. ORNL 14 MeV SS/Borated Polyethylene Slab Experiment -- DISCARDED
 
 - **Type:** Shielding experiment
 - **Description:** Integral experiments measuring neutron and gamma-ray energy spectra
@@ -353,29 +441,37 @@ specifications and reference experimental or computational results for validatio
 - **Notes:** Historical US benchmark. Tests multi-material shielding with boron
   capture effects. Less commonly used than FNG/FNS experiments but provides
   independent US experimental data.
+- **Evaluation:** DISCARDED. No dedicated SINBAD abstract page exists -- the
+  specification URL just points to the SINBAD master index. The only listing found
+  is "ORNL 14-MeV Neutron SS/Borated Poly Slab" under SB5_FUS with year 1979.
+  No geometry dimensions, material compositions, or MCNP input files are accessible
+  online. Full data requires RSICC access (rsic@ornl.gov). Insufficient freely
+  available documentation to build a model without RSICC distribution.
 
 ---
 
 ## Summary Table
 
-| # | Name | Type | Complexity | OpenMC Prior Work | Experimental Data |
-|---|------|------|------------|-------------------|-------------------|
-| 1 | FNG-ITER Bulk Shield | Shield mock-up | Moderate | TRIPOLI/MCNP | Yes (SINBAD) |
-| 2 | FNG-ITER Streaming | Streaming/shielding | Moderate-High | Yes (published) | Yes (SINBAD) |
-| 3 | FNG HCPB TBM Mock-up | Breeding blanket | Moderate | Yes (published) | Yes (SINBAD) |
-| 4 | FNG Copper | Material shielding | Low-Moderate | Yes (published) | Yes (SINBAD) |
-| 5 | FNG Tungsten | Material shielding | Low-Moderate | No | Yes (SINBAD) |
-| 6 | FNG-ITER Dose Rate | Shutdown dose | Moderate | Yes (published) | Yes (SINBAD) |
-| 7 | FNS Clean (W/V/Be) | Material neutronics | Low | Yes (published) | Yes (SINBAD) |
-| 8 | FNS Dogleg Duct | Streaming | Moderate | In progress | Yes (SINBAD) |
-| 9 | KANT Be Shells | Neutron multiplication | Low | No | Yes (SINBAD) |
-| 10 | OKTAVIAN Spheres | Leakage spectra | Very Low | Yes (repository) | Yes (SINBAD) |
-| 11 | IPPE Iron Shells | Transmission | Very Low | No | Yes (SINBAD) |
-| 12 | FNG WCLL Mock-up | Breeding blanket | Moderate | No | Yes |
-| 13 | EU DEMO HCPB Sector | Tokamak sector | High | Partial | Computational |
-| 14 | TUD Iron Slab | Material shielding | Low | No | Yes (SINBAD) |
-| 15 | Juelich Li Blanket | Breeding blanket | Moderate | No | Yes (SINBAD) |
-| 16 | ORNL SS/BPoly Slab | Shielding | Low | No | Yes (SINBAD) |
+| # | Name | Type | Complexity | Status | Reason |
+|---|------|------|------------|--------|--------|
+| 1 | FNG-ITER Bulk Shield | Shield mock-up | Moderate | **FINALIST** | Full SINBAD specs, MCNP input, 14+17 measurement positions |
+| 2 | FNG-ITER Streaming | Streaming/shielding | Moderate-High | **FINALIST** | 6 MCNP files, already validated with OpenMC, weight window test |
+| 3 | FNG HCPB TBM Mock-up | Breeding blanket | Moderate | **FINALIST** | Exact dimensions/densities, MCNP-4C model, tritium breeding |
+| 4 | FNG Copper | Material shielding | Low-Moderate | **FINALIST** | In SINBAD, already in OpenMC, simple 7-plate geometry |
+| 5 | FNG Tungsten | Material shielding | Low-Moderate | **FINALIST** | DENSIMET compositions, 4 MCNP files, 9 foil reactions |
+| 6 | FNG-ITER Dose Rate | Shutdown dose | Moderate | **DISCARDED** | Requires R2S coupling (not simple fixed-source) |
+| 7 | FNS Clean (W/V/Be) | Material neutronics | Low | **FINALIST** | Already validated with OpenMC, MCNP inputs, comprehensive data |
+| 8 | FNS Dogleg Duct | Streaming | Moderate | **FINALIST** | Full dimensions, 2 MCNP files, weight window test |
+| 9 | KANT Be Shells | Neutron multiplication | Low | **FINALIST** | Spherical geometry, MCNP model, 178-group spectra |
+| 10 | OKTAVIAN Spheres | Leakage spectra | Very Low | **FINALIST** | Simplest geometry, already in openmc_fusion_benchmarks |
+| 11 | IPPE Iron Shells | Transmission | Very Low | **FINALIST** | 5 MCNP files, systematic thickness study |
+| 12 | FNG WCLL Mock-up | Breeding blanket | Moderate | **DISCARDED** | Specs behind ScienceDirect paywall |
+| 13 | EU DEMO HCPB Sector | Tokamak sector | High | **DISCARDED** | Paywall, computational-only, too complex |
+| 14 | TUD Iron Slab | Material shielding | Low | **FINALIST** | MCNP input, 17 data tables, 3 gap configurations |
+| 15 | Juelich Li Blanket | Breeding blanket | Moderate | **DISCARDED** | No MCNP input, geometry only in JPG figures |
+| 16 | ORNL SS/BPoly Slab | Shielding | Low | **DISCARDED** | No online specs, requires RSICC access |
+
+**Final count: 11 FINALISTS, 5 DISCARDED**
 
 ---
 
@@ -397,12 +493,6 @@ specifications and reference experimental or computational results for validatio
 - FNG-ITER bulk shield (#1) -- multi-material ITER mock-up
 - FNG-ITER streaming (#2) -- already validated with OpenMC, tests weight windows
 - FNS dogleg duct (#8) -- streaming through bent duct
-- FNG-ITER dose rate (#6) -- requires R2S coupling for shutdown dose
-
-**Phase 4 -- Blanket systems and reactor models (months):**
-- FNG WCLL mock-up (#12) -- latest blanket experiment
-- Juelich Li blanket (#15) -- multiple blanket configurations
-- EU DEMO HCPB sector (#13) -- full reactor sector model
 
 ---
 
