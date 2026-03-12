@@ -1,0 +1,56 @@
+TUD Iron Slab Benchmark
+========================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+Entry:       TUD Iron Slab Experiment
+Facility:    Technische Universitaet Dresden (TUD), Germany
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/tud_fe/tufe-abs.htm
+
+Description:
+  Spectral neutron and photon flux measurements were performed behind large
+  iron slab assemblies (100 x 100 cm front face, 30 cm thick) irradiated by
+  14 MeV D-T neutrons at TUD. Three configurations were tested:
+
+    A0: Solid slab (no gap) -- baseline deep-penetration measurement
+    A1: 5 cm vertical gap at 10 cm from centre -- streaming configuration
+    A2: 5 cm vertical gap at 20 cm from centre -- streaming configuration
+
+  The slab was constructed from 20 x 10 x 5 cm iron blocks. An NE213
+  scintillation detector measured neutron (above 1 MeV) and photon (above
+  0.2 MeV) spectra simultaneously at 300 cm behind the slab rear face.
+  Supplementary proportional counters and a stilbene scintillator covered
+  the 30 keV to 2.3 MeV neutron energy range. Time-of-arrival spectra were
+  also recorded.
+
+  The gap configurations (A1, A2) are particularly relevant for studying
+  radiation streaming through penetrations in fusion reactor shields, such
+  as beam ports, diagnostic channels, and coolant pipes.
+
+Geometry:
+  - Iron slab: 100 x 100 cm frontal area, 30 cm thick
+  - Built from 20 x 10 x 5 cm iron blocks
+  - Source-to-slab distance: 19 cm
+  - Slab-to-detector distance: 300 cm
+  - Total source-to-detector: 349 cm
+  - D-beam angle: 74 degrees relative to source-slab axis
+
+Material:
+  - Natural iron (Fe), density ~7.874 g/cm3
+
+Measurements:
+  - Neutron energy spectra (NE213: > 1 MeV; proportional counters: 30 keV - 2.3 MeV)
+  - Photon energy spectra (NE213: > 0.2 MeV)
+  - Time-of-arrival spectra
+  - Three slab configurations (A0, A1, A2)
+
+Reference calculations:
+  - MCNP-4A with FENDL-1 and EFF-2 nuclear data libraries
+
+Key references:
+  H. Freiesleben, W. Hansen, D.Onal, K. Seidel, S. Unholzer,
+  "Neutron and Photon Flux Spectra Measurements for an Iron Slab Assembly
+  Bombarded with 14.8 MeV Neutrons," TU Dresden reports.
+
+  SINBAD database compilation, NEA/OECD.
