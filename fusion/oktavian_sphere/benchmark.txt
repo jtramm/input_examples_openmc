@@ -1,0 +1,34 @@
+OKTAVIAN Iron Sphere Benchmark
+==============================
+
+Source:  SINBAD (Shielding Integral Benchmark Archive Database)
+         OECD Nuclear Energy Agency
+
+URL:     https://www.oecd-nea.org/science/wprs/shielding/sinbad/oktav_fe/okfe-abs.htm
+
+Facility
+--------
+The OKTAVIAN (Osaka-university Toolkit for Verification and Analysis of
+Neutronics) facility at Osaka University, Japan.  A series of sphere
+transmission experiments were performed with various materials including
+iron, aluminium, silicon, nitrogen, oxygen, and others.
+
+Experiment
+----------
+A 14.1 MeV deuterium-tritium (D-T) neutron source is placed at the center
+of a sphere of carbon steel (iron).  The neutron leakage spectrum is measured
+by time-of-flight (TOF) at a detector approximately 9.5 m from the source.
+
+Key Parameters
+--------------
+  Material        : Carbon steel (JIS SS41), ~98.69 wt% Fe
+  Sphere radius   : 50.32 cm
+  Density         : 7.874 g/cm^3
+  Source energy    : 14.1 MeV (monoenergetic, isotropic)
+  Measurement     : Neutron leakage energy spectrum (~10 keV to 15 MeV)
+
+Purpose
+-------
+This benchmark tests the accuracy of iron cross sections for fusion
+neutronics applications.  It is sensitive to elastic and inelastic
+scattering, the (n,2n) reaction, and resonance structure in iron.
