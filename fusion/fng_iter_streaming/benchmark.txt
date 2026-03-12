@@ -1,0 +1,55 @@
+FNG-ITER Streaming Experiment: Neutron Streaming Through ITER-Like Duct
+=========================================================================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+             OECD Nuclear Energy Agency
+Facility:    Frascati Neutron Generator (FNG), ENEA Frascati, Italy
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/fng_str/fngstr-a.htm
+
+Description:
+  A 14 MeV D-T neutron streaming experiment through an ITER-like shielding
+  assembly containing a narrow cylindrical duct (28 mm inner diameter,
+  39.07 cm long), a rectangular detector cavity (148 x 48 x 52 mm), and
+  rear Cu/SS316 plates simulating a superconducting magnet coil.
+
+  The assembly is 100 x 100 cm in cross-section and 94.26 cm deep, composed
+  of alternating layers of perspex (PMMA), stainless steel AISI-316, copper,
+  and polyethylene. The streaming channel penetrates the front perspex/SS316
+  region, simulating a diagnostic or instrumentation port through the ITER
+  blanket/shield.
+
+  Two source configurations were measured:
+    - On-axis:  D-T source centred on the channel axis
+    - Off-axis: D-T source shifted 5.3 cm laterally
+
+  This is the most complex fusion shielding benchmark from the FNG facility
+  and exercises neutron streaming, deep penetration, and variance reduction
+  capabilities of Monte Carlo transport codes.
+
+Geometry:
+  - Assembly: 100 x 100 x 94.26 cm (width x height x depth)
+  - Front Cu plate: 1 cm (first wall simulator)
+  - Perspex/SS316 layers: alternating blocks with 3 mm SS316 plates
+  - Streaming channel: 28 mm ID, 1 mm SS316 wall, 39.07 cm long
+  - Detector cavity: 148 x 48 x 52 mm (x, y, z), centred on axis
+  - Cu/SS316 coil simulator: ~16.8 cm thick
+  - Polyethylene rear shield: ~31 cm
+  - D-T point source at 5.3 cm from front face
+
+Measurements:
+  - Activation foil reaction rates at 23 positions along the axis:
+    4 in channel, 11 in cavity, 8 behind cavity
+  - Reactions: Nb-93(n,2n), Al-27(n,alpha), Ni-58(n,p), Au-197(n,gamma)
+  - Nuclear heating with CaF2:Tm TLD-300 detectors
+
+Key references:
+  P. Batistoni et al., "Neutron Streaming Experiment at FNG for ITER
+  Shielding," Fusion Eng. Des., 1998.
+
+  R. Villari et al., "Analysis of the FNG Streaming Experiment,"
+  Fusion Eng. Des., 2000.
+
+  SINBAD Compilation, "FNG/ITER Streaming Experiment,"
+  NEA/NSC/DOC, OECD Nuclear Energy Agency.

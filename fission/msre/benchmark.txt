@@ -1,0 +1,37 @@
+MSRE - Molten Salt Reactor Experiment
+=====================================
+
+Benchmark: IRPhEP MSRE-MSR-EXP-001
+Facility: Oak Ridge National Laboratory, Oak Ridge, Tennessee, USA
+Dates of Operation: 1965-1969
+
+Description:
+  The Molten Salt Reactor Experiment (MSRE) was the world's first molten-salt
+  fueled reactor to reach criticality and sustained operation. A liquid fluoride
+  salt (LiF-BeF2-ZrF4-UF4) served as both the fuel carrier and primary coolant.
+  The salt flowed upward through channels formed between vertical graphite
+  moderator stringers, exited the reactor vessel, passed through a heat
+  exchanger, and was pumped back into the core. The graphite provided neutron
+  moderation while the fuel salt carried the fissile material.
+
+  The MSRE demonstrated that molten-salt reactors could operate safely and
+  reliably. It proved the viability of on-line fuel processing, operated with
+  both U-235 and U-233 fuel loadings, and accumulated over 13,000 equivalent
+  full-power hours.
+
+Reference Documents:
+  - IRPhEP Handbook, MSRE-MSR-EXP-001 (2020 edition)
+  - Robertson, R.C. "MSRE Design and Operations Report, Part I",
+    ORNL-TM-0728 (1965)
+  - Haubenreich, P.N., Engel, J.R. "Experience with the Molten-Salt Reactor
+    Experiment", Nuclear Applications and Technology, 8, 118-136 (1970)
+  - Prince, B.E. et al. "Zero-Power Physics Experiments on the Molten-Salt
+    Reactor Experiment", ORNL-4233 (1968)
+
+Frontiers in Nuclear Engineering Paper (CSG vs CAD comparison):
+  https://www.frontiersin.org/journals/nuclear-engineering/articles/10.3389/fnuen.2024.1385478/full
+
+Reference k-eff Values:
+  Experimental:         0.99978 +/- 0.00420
+  OpenMC (CSG):         1.00878 +/- 0.00032
+  Serpent (ENDF/B-VII.1): 1.02132 +/- 0.00003

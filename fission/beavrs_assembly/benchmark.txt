@@ -1,0 +1,97 @@
+BEAVRS - Benchmark for Evaluation And Validation of Reactor Simulations
+========================================================================
+
+Document: BEAVRS v1.0.1 Specification
+Authors:  N. Horelik, B. Herman, B. Forget, K. Smith
+Org:      MIT Computational Reactor Physics Group
+URL:      https://github.com/mit-crpg/BEAVRS
+
+Description
+-----------
+BEAVRS is a benchmark based on REAL MEASURED DATA from an operating
+Westinghouse 4-loop pressurized water reactor rated at 3411 MWth. It
+provides detailed specifications of the reactor geometry, materials,
+and operating conditions, along with actual plant measurements for
+validation of reactor physics simulation codes.
+
+Unlike many computational benchmarks that compare code-to-code results,
+BEAVRS enables true validation against reality. The measured data includes:
+  - Hot zero power (HZP) critical boron concentrations
+  - Boron letdown curves for Cycle 1 and Cycle 2
+  - Three-dimensional in-core flux maps from 58 instrumented assemblies
+  - Control rod bank worths
+  - Isothermal temperature coefficients
+  - Startup physics test results
+
+Reactor Description
+-------------------
+Type:           Westinghouse 4-loop PWR
+Thermal power:  3411 MWth
+Fuel assemblies: 193 (17x17 lattice design)
+Active height:  365.76 cm (12 feet)
+Assembly pitch: 21.50364 cm
+Pin pitch:      1.25984 cm
+Fuel:           UO2 at 1.6, 2.4, and 3.1 wt% U-235
+
+Fuel Assembly Layout (17x17)
+-----------------------------
+Total pins:     289 (17 x 17)
+Fuel pins:      264
+Guide tubes:    24 (for control rods or water)
+Instrument tube: 1 (center position, for in-core detectors)
+
+Pin Dimensions (BEAVRS vs VERA comparison):
+                        BEAVRS          VERA
+  Fuel pellet OR:       0.39218 cm      0.4096 cm
+  Clad IR (gap):        0.40005 cm      0.418  cm
+  Clad OR:              0.45720 cm      0.475  cm
+  Guide tube IR:        0.56134 cm      0.561  cm
+  Guide tube OR:        0.60198 cm      0.602  cm
+  Instrument tube IR:   0.55880 cm      0.559  cm
+  Instrument tube OR:   0.60452 cm      0.605  cm
+  Pin pitch:            1.25984 cm      1.26   cm
+  Assembly pitch:       21.50364 cm     21.50  cm
+
+Hot Zero Power Conditions
+--------------------------
+  Fuel temperature:       600 K
+  Moderator temperature:  565 K
+  Moderator density:      0.740 g/cc
+  System pressure:        155.13 bar (2250 psia)
+  Soluble boron:          ~975 ppm (measured critical concentration)
+
+Reference Measured Data
+------------------------
+HZP critical boron concentration: ~975 ppm
+
+This is the soluble boron concentration at which the full core
+(193 assemblies with mixed enrichment loading, all control rods
+withdrawn) achieves criticality at hot zero power conditions.
+
+Important: This is a FULL CORE measurement. A single-assembly
+infinite-lattice calculation at 975 ppm boron will give k-eff > 1.0
+because:
+  1. No radial neutron leakage (reflective BCs)
+  2. No axial neutron leakage (2D model)
+  3. Uniform enrichment (real core has mixed loading)
+  4. No burnable absorbers (some assemblies have BPs in the real core)
+
+Comparison with VERA Benchmark
+-------------------------------
+BEAVRS and VERA are complementary benchmarks:
+
+BEAVRS:
+  - Based on real plant, real measured data
+  - True validation (code vs. reality)
+  - More complex (full plant specification)
+  - Critical boron is the primary measured quantity
+
+VERA:
+  - Computational benchmark (code vs. code)
+  - Reference is a converged Monte Carlo solution
+  - Simpler, progression of problems
+  - k-eff is the primary comparison quantity
+  - Based on Watts Bar Unit 1 (also a Westinghouse 4-loop PWR)
+
+Both use the standard Westinghouse 17x17 fuel assembly design, but
+with slightly different dimensions reflecting different plant vintages.

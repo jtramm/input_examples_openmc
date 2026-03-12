@@ -1,0 +1,55 @@
+McSAFER NuScale-like SMR Neutronics Benchmark
+==============================================
+
+Paper:    "Neutronics Benchmark of the NuScale-like SMR in the McSAFER Project"
+Authors:  J. Bousquet et al.
+Journal:  Journal of Nuclear Engineering, 2025, 6(4), 44
+URL:      https://www.mdpi.com/2673-4362/6/4/44
+
+Project:  McSAFER (Multi-Criteria Analysis of Safety, Environmental, and
+          Financial aspects of Energy systems based on Renewable sources
+          and small modular Reactors)
+Funding:  EU Horizon 2020 (Grant Agreement No. 945063)
+
+Description
+-----------
+This benchmark defines a NuScale-like Small Modular Reactor (SMR) core for
+code-to-code comparison of neutronics calculations. The NuScale Power Module
+is a 77 MWe (250 MWth) integral pressurized water reactor designed for
+factory fabrication and modular deployment, with up to 12 modules per plant.
+
+Key Design Features
+-------------------
+- Compact core: 37 fuel assemblies (17x17 Westinghouse-type)
+- Short active fuel length: 200 cm (vs ~366 cm in a standard PWR)
+- Natural circulation primary cooling (no reactor coolant pumps)
+- BORON-FREE OPERATION: no dissolved boric acid in the moderator
+  (reactivity control via Gd2O3 burnable absorbers and control rods)
+- Seven assembly types varying in enrichment (2.0%, 2.6%, 3.1% U-235)
+  and gadolinium content (0, 4, 8, 12, 16 Gd pins per assembly)
+
+This Model (Implemented Here)
+------------------------------
+- Single assembly: 3.1 wt% U-235 enriched UO2, no gadolinium
+  (the simplest assembly type in the benchmark)
+- 2D infinite lattice with reflective boundary conditions
+- Hot full power conditions: 900K fuel, 557K moderator
+- All control rods withdrawn (ARO)
+- Zero soluble boron in moderator
+
+Reference Solution
+------------------
+Code:     Serpent 2 (continuous-energy Monte Carlo)
+Library:  ENDF/B-VII.1 or JEFF-3.3 (varies by participant)
+k-eff:    ~1.18 (approximate, for the 3.1% assembly without Gd, fresh fuel)
+
+Multiple participants calculated this benchmark using various codes:
+  - Serpent 2 (VTT, reference)
+  - OpenMC
+  - MCNP
+  - SCALE/KENO
+  - MORET
+  - Various deterministic codes
+
+Reported code-to-code differences are on the order of 200-500 pcm,
+with the OpenMC vs Serpent difference approximately 355 pcm.

@@ -1,0 +1,55 @@
+FNG HCPB Tritium Breeder Module Mock-up
+=========================================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+             OECD Nuclear Energy Agency
+Facility:    Frascati Neutron Generator (FNG), ENEA Frascati, Italy
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/fng_hcpb/fnghcpb-a.htm
+
+Description:
+  A mock-up of the Helium-Cooled Pebble Bed (HCPB) breeding blanket concept,
+  one of the two European candidate Test Blanket Modules (TBMs) for ITER. The
+  assembly consists of a metallic beryllium neutron multiplier with two double-
+  layer breeder sections of Li2CO3 powder enclosed in an AISI-303 stainless
+  steel box, plus a rear AISI-316 stainless steel cassette filled with Li2CO3
+  powder.
+
+  This is a KEY benchmark for validating tritium breeding calculations in
+  fusion blanket designs. The fundamental physics tested are:
+    - Be-9(n,2n) neutron multiplication
+    - Li-6(n,t) tritium breeding
+    - Neutron moderation in beryllium
+    - Parasitic absorption in structural steel
+
+Geometry:
+  - Main box (AISI-303 SS): 31.0 x 29.0 x 30.9 cm, 0.5 cm walls
+  - Rear cassette (AISI-316 SS): 31.0 x 14.8 x 30.9 cm, 0.5 cm walls
+  - Beryllium metal fill (density 1.85 g/cm3)
+  - Two double-layer breeder sections:
+      Each: 1.2 cm Li2CO3 + 1 mm SS divider + 1.2 cm Li2CO3
+  - Rear cassette filled with Li2CO3 powder (density 0.9413 g/cm3)
+  - D-T point source at 5.3 cm from front face
+
+Measurements:
+  - Tritium production rates (Li-6(n,t) and Li-7(n,t)) at 16 positions
+  - Activation foil reaction rates (Au, Ni, Al, Nb) at 4 depths:
+    y = 4.2, 10.5, 16.8, 23.1 cm from front surface
+  - TLD-300 for nuclear heating in breeder layers
+  - Total tritium production per breeder section
+
+Reference calculations:
+  - MCNP-4C with FENDL-2.1 and JEFF-3.1 nuclear data libraries
+  - DORT/TORT deterministic transport calculations for comparison
+
+Key references:
+  P. Batistoni et al., "Neutronics experiment on a mock-up of the Helium-
+  Cooled Pebble Bed breeding blanket for the European DEMO fusion reactor
+  at the Frascati Neutron Generator," Nucl. Fusion 41 (2001) 1535.
+
+  U. Fischer et al., "Neutronic analyses of the FNG HCPB mock-up
+  experiment," Fusion Eng. Des. 69 (2003) 359-363.
+
+  SINBAD Compilation, "FNG HCPB Tritium Breeder Module Mock-up,"
+  NEA/NSC/DOC, OECD Nuclear Energy Agency.
