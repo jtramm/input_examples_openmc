@@ -1,0 +1,44 @@
+KRITZ-2 Critical Experiments Benchmark
+=======================================
+
+Source:  OECD/NEA Benchmark on the KRITZ-2 LEU and MOX Critical Experiments
+Report: NEA/NSC/DOC(2005)24
+URL:    https://www.oecd-nea.org/upload/docs/application/pdf/2019-12/nsc-doc2005-24.pdf
+
+Description:
+  The KRITZ reactor operated at Studsvik, Sweden, during the first half of
+  the 1970s. The "KRITZ experiments" included a series of light-water-moderated
+  lattices with uranium rods, mixed-oxide rods, or both, at room temperature
+  and elevated temperatures up to ~245 deg C. Criticality was attained by
+  controlling the boron content in the water and by adjusting the water level.
+
+  Three KRITZ-2 configurations are included in the benchmark:
+    - KRITZ-2:1  -- UO2, 1.86 wt% U-235, 14.85 mm pitch, 44x44 rods
+    - KRITZ-2:13 -- UO2, 1.86 wt% U-235, 16.35 mm pitch, 40x40 rods
+    - KRITZ-2:19 -- MOX (weapons-grade Pu), 18.00 mm pitch, 25x24 rods
+
+  Each configuration was measured at room temperature (~20 deg C) and at
+  elevated temperature (~245 deg C). Criticality was achieved by adjusting
+  the boron concentration in the moderator water and the water level.
+
+Reference k-eff values (average of 13 participant solutions):
+  KRITZ-2:1  cold (19.7 deg C):  0.99463 +/- 0.00330
+  KRITZ-2:1  hot  (248.5 deg C): 0.99290 +/- 0.00346
+  KRITZ-2:13 cold (22.1 deg C):  0.99736 +/- 0.00204
+  KRITZ-2:13 hot  (243.0 deg C): 0.99605 +/- 0.00280
+  KRITZ-2:19 cold (21.1 deg C):  0.99908 +/- (not given)
+  KRITZ-2:19 hot  (235.9 deg C): 0.99822 +/- (not given)
+
+  Note: The experimental value should be 1.0 (critical). The average
+  predictions below 1.0 indicate a systematic under-prediction by most
+  codes, likely due to nuclear data and/or thermal scattering limitations.
+
+ICSBEP identifiers:
+  LEU-COMP-THERM-001 (KRITZ-2:1 and KRITZ-2:13)
+  MIX-COMP-THERM-001 (KRITZ-2:19)
+
+This benchmark is particularly valuable for:
+  - Validating temperature-dependent cross sections
+  - Testing thermal scattering (S(alpha,beta)) treatments
+  - Assessing Doppler broadening implementations
+  - Comparing UO2 vs MOX prediction accuracy
