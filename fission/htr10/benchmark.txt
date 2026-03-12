@@ -1,0 +1,90 @@
+HTR-10 Pebble Bed High-Temperature Gas-Cooled Reactor
+======================================================
+
+Facility
+--------
+The HTR-10 is a 10 MWth pebble bed high-temperature gas-cooled reactor
+(HTGR) built and operated by the Institute of Nuclear and New Energy
+Technology (INET) at Tsinghua University, Beijing, China. It achieved
+first criticality on December 1, 2000, and full power operation in
+January 2003.
+
+The HTR-10 was designed as a test reactor to demonstrate the inherent
+safety features of modular pebble bed HTGR technology, including:
+  - Passive decay heat removal without active cooling systems
+  - Negative temperature coefficient preventing power excursions
+  - Ability to withstand loss of coolant without fuel damage
+
+Primary References
+------------------
+[1] Wu, Z., Lin, D., and Zhong, D., "The design features of the HTR-10,"
+    Nuclear Engineering and Design, 218 (2002) 25-32.
+
+[2] IAEA-TECDOC-1382, "Evaluation of high temperature gas cooled reactor
+    performance: Benchmark analysis related to initial testing of the
+    HTTR and HTR-10," International Atomic Energy Agency, Vienna (2003).
+    URL: https://www.iaea.org/publications/6674/evaluation-of-high-temperature-gas-cooled-reactor-performance
+
+[3] Terry, W.K., Montierth, L.M., Kim, S.S., Cogliati, J.J., and Ougouag,
+    A.M., "Evaluation of the Initial Critical Configuration of the HTR-10
+    Pebble-Bed Reactor," Report HTR10-GCR-RESR-001, International Reactor
+    Physics Evaluation Project (IRPhEP), Idaho National Laboratory (2007).
+
+[4] Jing, X., et al., "The criticality and power distribution tests of
+    the HTR-10 pebble bed reactor," Proc. HTR-2004, Beijing (2004).
+
+[5] IAEA-TECDOC-1694, "Evaluation of high temperature gas cooled reactor
+    performance: Benchmark analysis related to the PBMR-400, PBMM, GT-MHR,
+    HTR-10 and the ASTRA critical facility," IAEA, Vienna (2013).
+
+Benchmark Description
+---------------------
+The HTR-10 initial criticality benchmark involves determining the critical
+loading height of fuel pebbles in the cylindrical core cavity. The core
+was loaded incrementally with fuel pebbles (interspersed with graphite
+moderator pebbles in some loading configurations) until criticality was
+achieved.
+
+Key specifications:
+  - Core cavity:     180 cm diameter x ~500 cm height (conical bottom)
+  - Fuel pebbles:    6.0 cm diameter (3.0 cm radius)
+  - Fuel zone:       5.0 cm diameter (2.5 cm radius) within each pebble
+  - TRISO particles: 8,335 per fuel pebble
+  - UO2 enrichment:  17 wt% U-235
+  - Coolant:         Helium at ~3 MPa
+  - Reflector:       Nuclear-grade graphite
+
+Critical height measurement: approximately 123 cm (16,890 fuel pebbles)
+
+Reference Calculations
+----------------------
+Multiple codes have been used to analyze the HTR-10 initial criticality:
+
+  Code        k-eff           Notes
+  ----        -----           -----
+  MCNP        1.027+/-0.002   Homogenized pebble model, ~126 cm height
+  VSOP        1.036           Diffusion theory with cell homogenization
+  Serpent     ~1.01-1.03      Varies with modeling detail
+  SCALE       ~1.02-1.04      KENO-VI Monte Carlo
+
+These calculations generally predict k-eff slightly above 1.0 at the
+measured critical height, with the spread arising from differences in:
+  - Cross section libraries and processing
+  - Treatment of double heterogeneity (explicit vs. homogenized TRISO)
+  - Geometric simplifications (cylindrical vs. actual cone-bottom core)
+  - Temperature distributions
+
+The Double Heterogeneity Challenge
+-----------------------------------
+TRISO-fueled pebble bed reactors exhibit "double heterogeneity":
+
+  1st level: TRISO micro-particles randomly dispersed in graphite matrix
+     - Self-shielding of UO2 kernels affects resonance absorption
+     - Explicit modeling vs. homogenization can cause ~500-2000 pcm bias
+
+  2nd level: Fuel pebbles randomly packed in the core cavity
+     - Inter-pebble streaming of neutrons
+     - Spatial self-shielding at the pebble scale
+
+Correctly capturing both levels of heterogeneity is a key challenge for
+reactor physics codes analyzing pebble bed reactors.

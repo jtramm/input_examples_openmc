@@ -727,6 +727,9 @@ breeder_names = [
     "rear_cassette",
 ]
 
+# Pre-create cell filters (one per breeder layer) to avoid duplicate ID warnings
+breeder_cell_filters = [openmc.CellFilter([bc]) for bc in breeder_cells]
+
 # --- Tally: Tritium production rate in each breeder layer ---
 # The (n,Xt) score counts the number of tritons produced per source neutron
 # in each cell. This is the KEY result of this benchmark -- it directly
@@ -738,10 +741,10 @@ breeder_names = [
 #   - Li-7(n,n't)He-4 (MT=112): secondary, requires E > 2.47 MeV
 # The experiment measured total tritium production, so (n,Xt) is the
 # appropriate score for comparison.
-for i, (bcell, bname) in enumerate(zip(breeder_cells, breeder_names)):
+for i, (bcf, bname) in enumerate(zip(breeder_cell_filters, breeder_names)):
     # Tritium production (energy-integrated)
     t_tally = openmc.Tally(name=f"tritium_production_{bname}")
-    t_tally.filters = [openmc.CellFilter([bcell])]
+    t_tally.filters = [bcf]
     t_tally.scores = ["(n,Xt)"]  # total triton production
     tallies.append(t_tally)
 
@@ -749,7 +752,7 @@ for i, (bcell, bname) in enumerate(zip(breeder_cells, breeder_names)):
     # This helps diagnose whether the spectrum is sufficiently thermalised
     # for efficient Li-6(n,t) breeding.
     spec_tally = openmc.Tally(name=f"flux_spectrum_{bname}")
-    spec_tally.filters = [openmc.CellFilter([bcell]), energy_filter]
+    spec_tally.filters = [bcf, energy_filter]
     spec_tally.scores = ["flux"]
     tallies.append(spec_tally)
 
@@ -772,16 +775,17 @@ tallies.append(total_tritium_tally)
 # The Be-9(n,2n) reaction rate indicates the multiplication efficiency.
 be_cells = [be_zone1_cell, be_zone2_cell, be_zone3_cell]
 be_names = ["be_zone1", "be_zone2", "be_zone3"]
+be_cell_filters = [openmc.CellFilter([bc]) for bc in be_cells]
 
-for bcell, bname in zip(be_cells, be_names):
+for bcf, bname in zip(be_cell_filters, be_names):
     be_flux_tally = openmc.Tally(name=f"flux_{bname}")
-    be_flux_tally.filters = [openmc.CellFilter([bcell])]
+    be_flux_tally.filters = [bcf]
     be_flux_tally.scores = ["flux"]
     tallies.append(be_flux_tally)
 
     # Be-9(n,2n) reaction rate -- directly measures neutron multiplication
     be_n2n_tally = openmc.Tally(name=f"n2n_rate_{bname}")
-    be_n2n_tally.filters = [openmc.CellFilter([bcell])]
+    be_n2n_tally.filters = [bcf]
     be_n2n_tally.scores = ["(n,2n)"]
     tallies.append(be_n2n_tally)
 
