@@ -1,0 +1,43 @@
+FNS Clean Benchmark: Tungsten Cylindrical Assembly
+====================================================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+Entry:       NEA-1553/80 -- FNS/JAERI Clean Experiment on Tungsten
+Facility:    Fusion Neutronics Source (FNS), JAEA, Tokai-mura, Japan
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/fns_w/fnsw-abs.htm
+
+Description:
+  A cylindrical assembly of tungsten alloy bricks (DENSIMET-type, W-Ni-Cu)
+  was irradiated by 14 MeV D-T neutrons at the FNS facility. Neutron spectra
+  were measured at four depths (0, 76, 228, 380 mm) along the central axis
+  using proton-recoil proportional counters, NE-213 scintillators, and
+  activation foils. Gamma heating rates were also measured.
+
+  The experiment is part of a series of clean benchmark experiments performed
+  at FNS for validating nuclear data and transport codes relevant to fusion
+  reactor shielding design. Tungsten is of particular interest as the primary
+  plasma-facing material for the ITER divertor.
+
+Geometry:
+  - Tungsten cylinder: 629 mm diameter x 507 mm length
+  - Composed of W-Ni-Cu alloy bricks, ~50.7 mm thick
+  - D-T point source at 200 mm from front face
+
+Measurements:
+  - Neutron spectra at 4 depths (5 keV -- 14 MeV)
+  - Activation foil reaction rates: Al-27(n,a), Nb-93(n,2n), In-115(n,n'),
+    W-186(n,g), Au-197(n,g)
+  - Gamma heating rates
+
+Reference calculations:
+  - MCNP-4A with FENDL-1 and JENDL-3.2
+  - Validated with OpenMC v0.14.1-dev
+
+Key references:
+  F. Maekawa, Y. Oyama, et al., "Benchmark Experiment on a Tungsten Assembly
+  Bombarded by D-T Neutrons," J. Nucl. Sci. Technol., Suppl. 2, 2002.
+
+  C. Konno et al., "Analysis of Fusion Neutronics Benchmark Experiments on
+  Tungsten," Fusion Eng. Des., 2005.
