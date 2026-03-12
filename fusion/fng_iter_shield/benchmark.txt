@@ -1,0 +1,58 @@
+FNG-ITER Bulk Shield Mock-up Benchmark
+=======================================
+
+Source:      SINBAD (Shielding Integral Benchmark Archive and Database)
+             OECD Nuclear Energy Agency
+Facility:    Frascati Neutron Generator (FNG), ENEA Frascati, Italy
+
+URL:
+  https://www.oecd-nea.org/science/wprs/shielding/sinbad/
+
+Description:
+  A ~94 cm thick mock-up simulating the ITER inboard shielding was
+  irradiated by 14 MeV D-T neutrons at the FNG facility. The assembly
+  reproduces the layered structure of the ITER inboard shield:
+
+    - First wall:     Cu heat sink + SS316 back plate
+    - Blanket:        SS316 structure + Perspex (water-equivalent moderator)
+    - Vacuum vessel:  SS316 shells + Perspex shielding fill
+    - TF coil:        Alternating Cu and SS316 plates
+
+  The mock-up was constructed from copper, stainless steel SS316, and
+  Perspex (PMMA, C5O2H8) sandwich layers. The rear section of alternating
+  copper and stainless steel plates simulates the toroidal field coil
+  winding pack (Nb3Sn superconductor in copper stabilizer with stainless
+  steel conduit).
+
+Geometry:
+  - Total mock-up thickness: ~94 cm (17 layers)
+  - Cross-section: ~60 x 60 cm
+  - D-T point source at 5.3 cm from front face
+  - 14 activation foil positions at depths:
+    3.43, 10.32, 17.15, 23.95, 30.80, 41.85, 46.85, 53.80,
+    60.55, 67.40, 74.40, 81.10, 87.75, 92.15 cm
+  - 17 TLD-300 positions for nuclear heating
+
+Materials:
+  - Copper: 8.96 g/cm^3, natural isotopic composition
+  - SS316:  7.93 g/cm^3 (Fe 65.4%, Cr 17%, Ni 12%, Mo 2.5%, Mn 2%, Si 1%)
+  - Perspex (PMMA): 1.19 g/cm^3, C5O2H8
+
+Measurements:
+  - Activation foil reaction rates at 14 depth positions:
+    Nb-93(n,2n), Al-27(n,alpha), Ni-58(n,p), Au-197(n,gamma)
+  - Nuclear heating (TLD-300) at 17 positions
+  - C/E ratios computed against MCNP reference calculations with
+    FENDL-1 and EFF-3 nuclear data libraries
+
+Key references:
+  P. Batistoni et al., "Neutronics Shield Experiment for ITER at the
+  Frascati Neutron Generator FNG," Fusion Eng. Des., vol. 47,
+  pp. 25-60, 1999.
+
+  M. Angelone, P. Batistoni, M. Pillon, "Neutron Streaming Experiment
+  and Analysis of the FNG-ITER Bulk Shield Mock-up," Fusion Eng. Des.,
+  2001.
+
+  SINBAD Compilation, "FNG/ITER Bulk Shield,"
+  NEA/NSC/DOC, OECD Nuclear Energy Agency.
