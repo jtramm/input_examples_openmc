@@ -1,0 +1,35 @@
+{
+  "benchmark": "KANT Beryllium Spherical Shell",
+  "source": "SINBAD / Forschungszentrum Karlsruhe",
+  "url": "https://www.oecd-nea.org/science/wprs/shielding/sinbad/kant/fzk-be_a.htm",
+  "description": "Neutron leakage spectra through concentric spherical beryllium shells with a central 14.1 MeV T(d,n) source. Key physics: Be-9(n,2n) neutron multiplication.",
+  "shells": {
+    "shell_1": {
+      "thickness_cm": 5.0,
+      "inner_radius_cm": 5.0,
+      "outer_radius_cm": 10.0,
+      "total_leakage": 1.3275872000000002,
+      "total_leakage_uncertainty": 0.00016106974318188155,
+      "neutron_multiplication": true,
+      "runtime_seconds": 4.75516396
+    },
+    "shell_2": {
+      "thickness_cm": 10.0,
+      "inner_radius_cm": 5.0,
+      "outer_radius_cm": 15.0,
+      "total_leakage": 1.6382032,
+      "total_leakage_uncertainty": 0.00020669719132190351,
+      "neutron_multiplication": true,
+      "runtime_seconds": 12.778553547000001
+    },
+    "shell_3": {
+      "thickness_cm": 17.0,
+      "inner_radius_cm": 5.0,
+      "outer_radius_cm": 22.0,
+      "total_leakage": 1.9326642999999997,
+      "total_leakage_uncertainty": 0.0002508319512680265,
+      "neutron_multiplication": true,
+      "runtime_seconds": 61.891754084
+    }
+  }
+}

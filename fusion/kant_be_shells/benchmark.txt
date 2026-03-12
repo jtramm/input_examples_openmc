@@ -1,0 +1,31 @@
+KANT Beryllium Spherical Shell Benchmark
+=========================================
+
+Source:  SINBAD database (Shielding Integral Benchmark Archive and Database)
+         KANT experiment at Forschungszentrum Karlsruhe (FZK), Germany
+
+URL:     https://www.oecd-nea.org/science/wprs/shielding/sinbad/kant/fzk-be_a.htm
+
+Description:
+  The Karlsruhe Neutron Transmission (KANT) experiment measured neutron
+  leakage spectra through concentric spherical beryllium shells with a
+  central T(d,n) 14.1 MeV neutron source. Three shell thicknesses were
+  tested: 5 cm, 10 cm, and 17 cm, all with an inner radius of 5 cm.
+
+  The key physics feature is the Be-9(n,2n) neutron multiplication reaction,
+  which has a threshold of approximately 1.85 MeV. Because the 14.1 MeV
+  source neutrons are well above this threshold, the total neutron leakage
+  exceeds the source strength -- more neutrons emerge from the shell than
+  enter it. This neutron multiplication property makes beryllium essential
+  in fusion reactor blanket designs for tritium breeding.
+
+Measurements:
+  - 178-group neutron leakage spectra from 50 keV to 15 MeV
+  - Five-group partial leakage multiplications
+  - Detectors: NE-213 scintillator (> 3 MeV), proton recoil proportional
+    counters (50 keV - 6 MeV), time-of-flight (< 100 keV), Bonner spheres
+  - Measurement angle: 60 degrees from deuteron beam axis
+  - Combined uncertainty: 8% (1-sigma)
+
+Reference:
+  SINBAD Abstract NEA-1553/73 (FZK-BE)
