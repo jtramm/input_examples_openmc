@@ -1,0 +1,39 @@
+VERA Core Physics Benchmark Progression Problem Specifications
+================================================================
+
+Document: CASL-U-2012-0131-004
+Author:   Andrew T. Godfrey
+Org:      Oak Ridge National Laboratory
+Date:     Revision 4, August 29, 2014
+URL:      https://corephysics.com/docs/CASL-U-2012-0131-004.pdf
+
+Description
+-----------
+This document defines a progression of benchmark problems for the
+Virtual Environment for Reactor Applications (VERA), developed by
+the Consortium for Advanced Simulation of Light Water Reactors
+(CASL). CASL is a U.S. Department of Energy Innovation Hub focused
+on advanced modeling and simulation of commercial nuclear reactors.
+
+The benchmarks start from simple configurations and progress in
+complexity:
+  - Problem 1: Single pin cells (A through E, varying conditions)
+  - Problem 2: Lattice problems (2x2 and larger assemblies)
+  - Problem 3: Single fuel assemblies
+  - Problem 4: Multi-assembly (color-set) problems
+  - Problem 5: Full core models
+
+Problem 1A (implemented here) is the simplest: a single UO2 fuel
+pin surrounded by borated water with reflective boundaries, at
+hot zero power conditions. It tests the fundamental neutronics
+transport capability of a code.
+
+Reference Solution for Problem 1A
+-----------------------------------
+Code:       CE KENO-VI (continuous energy Monte Carlo)
+Library:    ENDF/B-VII.0
+k-eff:      1.187038 +/- 0.000054
+Particles:  High statistics (converged reference)
+
+The reference was computed using the SCALE/KENO-VI Monte Carlo code
+with continuous-energy cross sections from ENDF/B-VII.0.
