@@ -205,11 +205,8 @@ beryllium.set_density("g/cm3", 1.85)
 li2co3_front = openmc.Material(name="Li2CO3 powder (front breeder sections)")
 li2co3_front.add_nuclide("Li6", 2.0 * 0.075, "ao")    # 7.5% of 2 Li atoms
 li2co3_front.add_nuclide("Li7", 2.0 * 0.925, "ao")    # 92.5% of 2 Li atoms
-li2co3_front.add_nuclide("C12", 0.9893, "ao")          # natural C (98.93% C-12)
-li2co3_front.add_nuclide("C13", 0.0107, "ao")          # natural C (1.07% C-13)
-li2co3_front.add_nuclide("O16", 3.0 * 0.99757, "ao")   # natural O (99.757% O-16)
-li2co3_front.add_nuclide("O17", 3.0 * 0.00038, "ao")   # natural O (0.038% O-17)
-li2co3_front.add_nuclide("O18", 3.0 * 0.00205, "ao")   # natural O (0.205% O-18)
+li2co3_front.add_element("C", 1.0, "ao")               # 1 carbon per formula unit
+li2co3_front.add_element("O", 3.0, "ao")               # 3 oxygen per formula unit
 li2co3_front.set_density("g/cm3", 1.123)
 
 # --- Li2CO3 powder (rear cassette) ---
@@ -220,11 +217,8 @@ li2co3_front.set_density("g/cm3", 1.123)
 li2co3_rear = openmc.Material(name="Li2CO3 powder (rear cassette)")
 li2co3_rear.add_nuclide("Li6", 2.0 * 0.075, "ao")
 li2co3_rear.add_nuclide("Li7", 2.0 * 0.925, "ao")
-li2co3_rear.add_nuclide("C12", 0.9893, "ao")
-li2co3_rear.add_nuclide("C13", 0.0107, "ao")
-li2co3_rear.add_nuclide("O16", 3.0 * 0.99757, "ao")
-li2co3_rear.add_nuclide("O17", 3.0 * 0.00038, "ao")
-li2co3_rear.add_nuclide("O18", 3.0 * 0.00205, "ao")
+li2co3_rear.add_element("C", 1.0, "ao")
+li2co3_rear.add_element("O", 3.0, "ao")
 li2co3_rear.set_density("g/cm3", 0.9413)
 
 # --- AISI-303 stainless steel (main box walls, breeder cassette walls) ---

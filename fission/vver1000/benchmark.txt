@@ -1,0 +1,61 @@
+VVER-1000 Mock-up Benchmark
+============================
+
+Full Name:
+    VVER-1000 Mock-up Criticality Experiments at the LR-0 Research Reactor
+
+Reference:
+    F. Setiawan, M. Lemaire, D. Lee,
+    "Analysis of VVER-1000 mock-up criticality experiments with nuclear data
+    library ENDF/B-VIII.0 and Monte Carlo code MCS,"
+    Nuclear Engineering and Technology, Vol. 53, pp. 1-18, 2021.
+    DOI: https://doi.org/10.1016/j.net.2020.06.015
+
+Additional References:
+    - IRPhE benchmark documentation (detailed geometry/material data)
+    - SINBAD database NEA-1517/82 (experimental measurements)
+
+Facility:
+    LR-0 research reactor, Research Center Rez, Czech Republic
+    Light-water-moderated zero-power reactor, max continuous power 1 kW
+
+Experiment Description:
+    The VVER-1000 mock-up reproduces a sector of a typical VVER-1000 reactor
+    core. It consists of 32 dismountable hexagonal fuel assemblies arranged
+    with 23.6 cm pitch. Each standard assembly contains 312 UO2 fuel pins,
+    18 B4C absorber guide tubes, and 1 central instrumentation tube, arranged
+    in a triangular lattice with 12.75 mm pin pitch.
+
+    Three UO2 enrichments are used: 2.0%, 3.0%, and 3.3% U-235.
+
+    Six critical configurations were achieved by varying the moderator level
+    (51.3 to 150.0 cm) and boric acid concentration (2.85 to 4.68 g/kg H3BO3).
+    Four radial pin power maps were also measured.
+
+    Experiments were conducted at room temperature and atmospheric pressure.
+
+Reference Results (MCS with ENDF/B-VII.1, Table 3 of paper):
+    Case 1: keff = 1.00137 (+137 pcm vs experiment)
+    Case 2: keff = 1.00307 (+307 pcm vs experiment)
+    Case 3: keff = 1.00403 (+403 pcm vs experiment)
+    Case 4: keff = 1.00462 (+462 pcm vs experiment)
+    Case 5: keff = 1.00495 (+495 pcm vs experiment)
+    Case 6: keff = 1.00532 (+532 pcm vs experiment)
+
+Reference Results (MCS with ENDF/B-VIII.0, Table 4 of paper):
+    Case 1: keff = 1.00153 (+153 pcm vs experiment)
+    Case 2: keff = 1.00321 (+321 pcm vs experiment)
+    Case 3: keff = 1.00429 (+429 pcm vs experiment)
+    Case 4: keff = 1.00483 (+483 pcm vs experiment)
+    Case 5: keff = 1.00523 (+523 pcm vs experiment)
+    Case 6: keff = 1.00559 (+559 pcm vs experiment)
+
+Technological Uncertainty (3 sigma):
+    Total: 300 to 468 pcm depending on case
+    Major contributors: boric acid concentration, fuel enrichment,
+    fuel assembly pitch, cladding thickness
+
+This Model:
+    Single hexagonal fuel assembly, 2D infinite lattice with reflective BCs.
+    Uses openmc.HexLattice with 11 rings (331 positions).
+    Demonstrates VVER-type hexagonal lattice construction in OpenMC.

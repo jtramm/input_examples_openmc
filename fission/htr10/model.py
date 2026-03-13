@@ -513,9 +513,17 @@ def build_pin_model(mats, particles, batches, inactive):
     settings.particles = particles
     settings.batches = batches
     settings.inactive = inactive
-    # Source at center of pebble
+    # Source distributed over the fuel zone with fissionable constraint.
+    # A point source at the origin would likely land in graphite matrix
+    # between TRISO particles, causing lost particles. Instead, we sample
+    # uniformly in a box covering the fuel zone and reject non-fissionable
+    # sites.
     settings.source = openmc.IndependentSource(
-        space=openmc.stats.Point((0.0, 0.0, 0.0))
+        space=openmc.stats.Box(
+            (-FUEL_ZONE_RADIUS, -FUEL_ZONE_RADIUS, -FUEL_ZONE_RADIUS),
+            (FUEL_ZONE_RADIUS, FUEL_ZONE_RADIUS, FUEL_ZONE_RADIUS)
+        ),
+        constraints={'fissionable': True}
     )
     settings.temperature = {'method': 'interpolation'}
     model.settings = settings

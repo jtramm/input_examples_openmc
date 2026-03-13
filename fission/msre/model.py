@@ -357,15 +357,110 @@ def create_homogenized_core(fuel_salt, graphite):
     fuel_volume_fraction = 0.225    # ~22.5% fuel salt by volume
     graphite_volume_fraction = 0.775  # ~77.5% graphite by volume
 
-    # Create the homogenized mixture
-    # openmc.Material.mix_materials combines materials by volume fraction,
-    # correctly computing the resulting atom densities.
-    core_mix = openmc.Material.mix_materials(
-        [fuel_salt, graphite],
-        [fuel_volume_fraction, graphite_volume_fraction],
-        "vo",  # mixing by volume fraction
-        name="Homogenized Core (Fuel Salt + Graphite)",
+    # We cannot use openmc.Material.mix_materials because the graphite
+    # contains an S(alpha,beta) thermal scattering table, which is not
+    # supported by mix_materials. Instead, we manually compute the
+    # homogenized atom densities.
+    #
+    # The effective number density of each nuclide is:
+    #   N_eff = V_frac * N_original
+    # where N_original is the atom density from the original material.
+    # Since we specify atom fractions and a macroscopic density, we
+    # scale the density contributions by volume fraction.
+
+    core_mix = openmc.Material(name="Homogenized Core (Fuel Salt + Graphite)")
+
+    # Compute an effective density as a volume-weighted average.
+    # This is exact for the total atom count per unit volume.
+    fuel_density = 2.32   # g/cm3
+    graphite_density = 1.86  # g/cm3
+    effective_density = (
+        fuel_volume_fraction * fuel_density
+        + graphite_volume_fraction * graphite_density
     )
+    core_mix.set_density("g/cm3", effective_density)
+
+    # Compute mass fractions for each nuclide.
+    # Mass of fuel salt component per cm3 of mixture:
+    fuel_mass = fuel_volume_fraction * fuel_density      # g/cm3
+    graphite_mass = graphite_volume_fraction * graphite_density  # g/cm3
+    total_mass = fuel_mass + graphite_mass  # = effective_density
+
+    # Fuel salt nuclide atom fractions (from create_fuel_salt)
+    # We add each nuclide scaled by the fuel salt mass fraction.
+    fuel_wt = fuel_mass / total_mass  # weight fraction of fuel salt in mix
+
+    # Get atom fractions from the fuel salt material and add them
+    # weighted by the fuel mass fraction. We use "ao" (atom fraction)
+    # and will normalize at the end.
+    #
+    # Actually, the simplest correct approach: add nuclides by their
+    # partial densities (mass per unit volume). We'll use weight fractions
+    # directly.
+
+    # Fuel salt nuclides -- copy from the fuel salt definition above.
+    # These are atom fractions within the fuel salt.
+    fuel_nuclides = {
+        "Li7":  0.26337 * 0.9999,
+        "Li6":  0.26337 * 0.0001,
+        "Be9":  0.11791,
+        "Zr90": 0.02026 * 0.5145,
+        "Zr91": 0.02026 * 0.1122,
+        "Zr92": 0.02026 * 0.1715,
+        "Zr94": 0.02026 * 0.1738,
+        "Zr96": 0.02026 * 0.0280,
+        "U235": 0.00365 * 0.33,
+        "U238": 0.00365 * 0.67,
+        "F19":  0.59481,
+    }
+
+    # Graphite: pure carbon (natural)
+    # Graphite has 1 atom type: C (natural carbon, ~98.9% C-12, 1.1% C-13)
+    # Atom fraction within graphite: 1.0
+
+    # To combine, we need to convert atom fractions to a common basis.
+    # Number density N = rho * N_A / M_avg, where M_avg is the average
+    # atomic mass. We compute the average atomic mass for each material
+    # and use that to get the atom density ratio.
+
+    # Average atomic mass of fuel salt (from atom fractions and atomic masses)
+    atomic_masses = {
+        "Li7": 7.016, "Li6": 6.015, "Be9": 9.012, "F19": 18.998,
+        "Zr90": 89.905, "Zr91": 90.906, "Zr92": 91.905,
+        "Zr94": 93.906, "Zr96": 95.908,
+        "U235": 235.044, "U238": 238.051, "C": 12.011,
+    }
+
+    fuel_M_avg = sum(
+        frac * atomic_masses[nuc] for nuc, frac in fuel_nuclides.items()
+    )
+    graphite_M_avg = 12.011  # pure carbon
+
+    # Number densities (relative, in units of N_A)
+    # N = rho / M_avg  (atoms per cm3 in units of N_A/cm3)
+    fuel_N = fuel_density / fuel_M_avg      # proportional to atom density
+    graphite_N = graphite_density / graphite_M_avg
+
+    # Effective number densities in the mixture
+    fuel_N_eff = fuel_volume_fraction * fuel_N
+    graphite_N_eff = graphite_volume_fraction * graphite_N
+
+    total_N_eff = fuel_N_eff + graphite_N_eff
+
+    # Add fuel salt nuclides with effective atom fractions
+    for nuc, frac in fuel_nuclides.items():
+        core_mix.add_nuclide(nuc, frac * fuel_N_eff / total_N_eff)
+
+    # Add graphite carbon with effective atom fraction
+    core_mix.add_element("C", 1.0 * graphite_N_eff / total_N_eff)
+
+    # Add S(alpha,beta) thermal scattering for the graphite component.
+    # Even in the homogenized mixture, the carbon atoms are still bound
+    # in the graphite crystal lattice, so the graphite scattering kernel
+    # applies to the carbon fraction.
+    core_mix.add_s_alpha_beta("c_Graphite")
+
+    core_mix.temperature = 922.0
 
     return core_mix
 
