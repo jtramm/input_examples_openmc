@@ -581,9 +581,10 @@ def build_homogeneous_model(fuel_salt, graphite, hastelloy):
         boundary_type="vacuum",
     )
     void_cell = openmc.Cell(name="External Void")
-    void_cell.region = ~outer_bound.region | (+vessel_outer_radius & +openmc.ZPlane(z0=-121.92) & -openmc.ZPlane(z0=121.92))
+    # The void region is everything inside the bounding box but outside the vessel
+    void_cell.region = -outer_bound & +vessel_outer_radius
 
-    # Build the universe
+    # Build the universe with all cells including the void
     root_universe = openmc.Universe(
         cells=[
             core_cell,
@@ -593,21 +594,11 @@ def build_homogeneous_model(fuel_salt, graphite, hastelloy):
             vessel_wall,
             vessel_top_cap,
             vessel_bottom_cap,
+            void_cell,
         ]
     )
 
-    # Wrap in a bounding cell with vacuum BCs
-    bounding_cell = openmc.Cell(
-        name="Bounding Cell",
-        region=outer_bound.region,
-        fill=root_universe,
-    )
-    outer_void = openmc.Cell(
-        name="Outer Void",
-        region=~outer_bound.region,
-    )
-
-    geometry = openmc.Geometry([bounding_cell, outer_void])
+    geometry = openmc.Geometry(root_universe)
 
     return materials, geometry
 

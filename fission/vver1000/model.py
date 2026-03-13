@@ -172,9 +172,11 @@ def build_model(enrichment=3.0, particles=10000, batches=110, inactive=10):
     # Using 10.4 g/cm3 as a representative value for the LR-0 fuel.
     fuel = openmc.Material(name=f'UO2 Fuel {enrichment}%')
     fuel.set_density('g/cm3', 10.4)
-    fuel.add_nuclide('U235', enrichment / 100.0, 'wo')
-    fuel.add_nuclide('U238', 1.0 - enrichment / 100.0, 'wo')
-    fuel.add_element('O', 2.0, 'ao')  # stoichiometric UO2
+    # UO2 stoichiometry: 1 U atom + 2 O atoms
+    # Express all as atom fractions for consistency
+    fuel.add_nuclide('U235', enrichment / 100.0)
+    fuel.add_nuclide('U238', 1.0 - enrichment / 100.0)
+    fuel.add_element('O', 2.0)  # stoichiometric UO2 (2 O per 1 U)
     fuel.temperature = 294.0
 
     # --- Zirconium Alloy Cladding ---
@@ -205,9 +207,11 @@ def build_model(enrichment=3.0, particles=10000, batches=110, inactive=10):
     boron_ppm = 818.0  # approximately, for Case 6
     water = openmc.Material(name='Borated Water')
     water.set_density('g/cm3', 0.998)  # room temperature water density
-    water.add_element('H', 2.0, 'ao')
-    water.add_element('O', 1.0, 'ao')
-    water.add_element('B', boron_ppm * 1e-6, 'wo')
+    water.add_element('H', 2.0)
+    water.add_element('O', 1.0)
+    # Add boron as atom fraction: boron_ppm by mass ≈ boron_ppm * 1e-6 * 18/10.81 atom ratio
+    b_atom_frac = boron_ppm * 1e-6 * (18.015 / 10.811) * 3.0  # relative to 3 atoms of H2O
+    water.add_element('B', b_atom_frac)
     water.add_s_alpha_beta('c_H_in_H2O')  # thermal scattering for H in H2O
     water.temperature = 294.0
 
