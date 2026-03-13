@@ -1,0 +1,74 @@
+VVER-1000 MOX Core Computational Benchmark
+=============================================
+
+Full Name:
+    VVER-1000 MOX Core Computational Benchmark
+
+Reference:
+    V. Boyarinov, G. Lazarenko, Yu. Semionov, et al.,
+    "VVER-1000 MOX Core Computational Benchmark,"
+    NEA/NSC/DOC(2005)17, OECD Nuclear Energy Agency, 2005.
+
+    ISBN: 92-64-01081-X
+
+Organization:
+    Expert Group on Reactor-based Plutonium Disposition,
+    Nuclear Science Committee, OECD Nuclear Energy Agency (NEA)
+
+Benchmark Description:
+    This benchmark evaluates the capability of reactor physics codes to
+    analyze a VVER-1000 core loaded with weapons-grade MOX fuel. The core
+    contains 163 hexagonal fuel assemblies arranged in a hexagonal lattice,
+    with approximately 30% of assemblies containing MOX fuel and the
+    remainder containing UOX fuel of various enrichments and burnup levels.
+
+    The weapons-grade plutonium isotopic vector is:
+      Pu-239: 93.6 at%
+      Pu-240: 5.9 at%
+      Pu-241: 0.4 at%
+      Pu-242: 0.1 at%
+
+    MOX assemblies use three radial zones with different PuO2 content
+    (2.4/2.7/3.6 wt% PuO2) to flatten the assembly power distribution.
+
+    The benchmark specifies multiple reactor states (S1-S6) with different
+    operating conditions. State S1 (HZP, ARO) is the primary eigenvalue
+    benchmark:
+      - Hot zero power: 552 K uniform temperature
+      - All rods out (ARO)
+      - 600 ppm soluble boron
+      - Fresh fuel (beginning of cycle)
+
+Core Design:
+    Reactor type:       VVER-1000 (hexagonal PWR)
+    Thermal power:      3000 MWth
+    Core assemblies:    163 hexagonal
+    Assembly pitch:     23.6 cm (flat-to-flat)
+    Pin pitch:          1.275 cm (triangular lattice)
+    Pins per assembly:  312 fuel + 18 guide tubes + 1 instrument tube = 331
+    Fuel pellet radius: 0.386 cm
+    Clad outer radius:  0.458 cm
+    Active fuel height: 353 cm
+    Core diameter:      ~316 cm (equivalent)
+
+Reference Results (State S1, from benchmark participants):
+    MCU Monte Carlo:    keff ~ 1.000-1.010
+    TVS-M:              keff ~ 1.005
+    HELIOS/BIPR:        keff ~ 1.003
+    WIMS/RFSP:          keff ~ 1.004
+    APOLLO/CRONOS:      keff ~ 1.006
+
+    Spread among participants: ~500 pcm
+    The benchmark is designed as a near-critical configuration.
+
+Additional Benchmark States:
+    S2: HFP (hot full power, non-uniform temperature distribution)
+    S3-S4: Control rod worth measurements
+    S5-S6: Isothermal temperature coefficient measurements
+
+This Model:
+    Full-core 2D model with 163 assemblies, ~30% MOX loading.
+    Uses simplified material compositions (burned fuel approximated as
+    fresh UOX with reduced enrichment). State S1 conditions.
+    Pin-resolved geometry with explicit fuel, gap, clad, and moderator
+    regions. Radial reflector includes steel baffle and water.

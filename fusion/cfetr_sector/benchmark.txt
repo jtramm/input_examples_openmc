@@ -1,0 +1,70 @@
+CFETR 22.5-Degree Toroidal Sector (WCCB Blanket)
+==================================================
+
+Source:      Conceptual design studies for the China Fusion Engineering
+             Test Reactor (CFETR)
+Facility:    CFETR (proposed), Institute of Plasma Physics, Chinese
+             Academy of Sciences (ASIPP), Hefei, China
+
+Description:
+  A simplified 22.5-degree toroidal sector (1/16 of full torus, one TF coil
+  period) of the CFETR tokamak with the Water-Cooled Ceramic Breeder (WCCB)
+  blanket concept. CFETR is designed to bridge the gap between ITER and a
+  demonstration fusion power plant, targeting steady-state operation, tritium
+  self-sufficiency, and electricity generation.
+
+  The WCCB blanket uses:
+    - Li4SiO4 ceramic pebbles (60% Li-6 enrichment) as tritium breeder
+    - Beryllium pebbles as neutron multiplier
+    - CLF-1 RAFM steel as structural material
+    - Pressurized water as coolant
+
+  This benchmark validates:
+    - Tritium Breeding Ratio (TBR) calculations for the WCCB concept
+    - Nuclear heating distribution across tokamak components
+    - Neutron multiplication efficiency (Be-9(n,2n) reaction)
+    - Fast neutron flux attenuation through the radial build
+    - Shielding performance of the blanket + VV system
+
+Device parameters:
+  - Major radius: 560 cm (5.6 m)
+  - Plasma minor radius: 130 cm (1.3 m)
+  - Elongation: 1.8 (circular cross-section used in this simplified model)
+  - Fusion power: 200 MW (Phase I) to 1000 MW (Phase II)
+  - Number of TF coils: 16
+  - Plasma current: 10 MA
+
+Radial build (from plasma axis outward):
+  - Plasma chamber: 0 - 130 cm (void)
+  - First wall: 130 - 132 cm (CLF-1 RAFM steel, 2 cm)
+  - Breeding blanket: 132 - 182 cm (homogenized WCCB, 50 cm)
+  - Back support structure: 182 - 197 cm (CLF-1 + H2O 70/30, 15 cm)
+  - VV inner wall: 197 - 201 cm (SS316LN, 4 cm)
+  - VV fill: 201 - 221 cm (SS316 + H2O 60/40, 20 cm)
+  - VV outer wall: 221 - 225 cm (SS316LN, 4 cm)
+  - Thermal shield: 225 - 227 cm (SS304, 2 cm)
+  - TF coil: 227 - 252 cm (SS316 + Cu, 25 cm)
+
+Expected results (from literature):
+  - Global TBR: ~1.1-1.3 with 60% Li-6 enrichment and full blanket coverage
+    (achieving TBR > 1.2 is noted as a design challenge by Zhu et al.)
+  - Nuclear heating dominated by blanket region (~80% of total)
+  - Be(n,2n) multiplication essential for TBR > 1.0
+  - Fast flux at VV attenuated by ~3-4 orders of magnitude relative to FW
+
+Key references:
+  S. Zhu, Y. Song, L. Peng, et al., "Design and R&D progress of the CFETR
+  blanket," Plasma Sci. Technol. 18 (2016) 13.
+  DOI: 10.1088/1009-0630/18/7/13
+
+  Y. Wan, J. Li, Y. Liu, et al., "Overview of the present progress and
+  activities on the CFETR," Nucl. Fusion 57 (2017) 102009.
+  DOI: 10.1088/1741-4326/aa686a
+
+  Y. Song, S. Wu, J. Li, et al., "Concept Design of CFETR Tokamak Machine,"
+  IEEE Trans. Plasma Sci. 42 (2014) 503-509.
+  DOI: 10.1109/TPS.2014.2299277
+
+  Q. Huang, "Development status of CLAM steel for fusion application,"
+  J. Nucl. Mater. 455 (2014) 649-654.
+  DOI: 10.1016/j.jnucmat.2014.08.055

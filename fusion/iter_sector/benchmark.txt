@@ -1,0 +1,85 @@
+Simplified ITER Tokamak 40-Degree Sector Benchmark
+====================================================
+
+Source:      ITER Organization design documents and published neutronics analyses
+Facility:    ITER, CEA Cadarache, Saint-Paul-les-Durance, France
+
+Description:
+  Simplified CSG model of one 40-degree sector (1/9 of the torus, corresponding
+  to 2 toroidal field coil periods) of the ITER tokamak. The geometry consists
+  of concentric toroidal shells with circular cross-sections centred on a major
+  radius of 620 cm. The model includes all major radial build components from
+  the plasma to the TF coil outer case.
+
+  This is a simplified benchmark intended for code validation and educational
+  purposes. The actual ITER neutronics models use detailed CAD-based geometry
+  with elongated D-shaped plasma cross-sections, port penetrations, and
+  component-level detail.
+
+Device parameters:
+  - Major radius R0:           620 cm
+  - Plasma minor radius a:     200 cm (circular cross-section)
+  - Sector angle:              40 degrees (18 TF coils -> 360/9 = 40 deg)
+  - D-T fusion power:          500 MW (400 MW in neutrons at 14.1 MeV)
+  - Magnetic field on axis:    5.3 T (not modelled)
+
+Radial build (minor radius from magnetic axis):
+  Component                      Inner (cm)  Outer (cm)  Thickness (cm)
+  ----------------------------   ----------  ----------  --------------
+  Plasma (void)                       0         200          200
+  Beryllium armor                   200         201            1
+  Copper heat sink                  201         202            1
+  SS316LN first wall structure      202         204            2
+  Shielding blanket (SS+H2O)       204         249           45
+  Blanket-VV gap (void)            249         253            4
+  VV inner shell (SS316LN)         253         259            6
+  VV fill (SS316LN+H2O)           259         289           30
+  VV outer shell (SS316LN)        289         295            6
+  VV-TS gap (void)                295         300            5
+  Thermal shield (SS304)          300         302            2
+  TS-TF gap (void)                302         310            8
+  TF coil inner case (SS316LN)   310         315            5
+  TF winding pack (homogenized)  315         340           25
+  TF coil outer case (SS316LN)   340         345            5
+
+Materials:
+  - Beryllium armor: 1.85 g/cm^3, natural Be
+  - Copper heat sink: 8.96 g/cm^3, natural Cu (69.17% Cu-63, 30.83% Cu-65)
+  - SS316LN: 7.93 g/cm^3 (Fe 62.5%, Cr 17.5%, Ni 12.5%, Mo 2.5%,
+    Mn 2%, Si 1%, N 0.15%, C 0.03% by weight)
+  - Blanket/VV fill: homogenized SS316LN + H2O, 60/40 by volume,
+    effective density 5.158 g/cm^3
+  - TF winding pack: homogenized SS316LN (50%) + Cu (30%) + Nb (15%) +
+    Sn (5%) by volume, effective density ~8.3 g/cm^3
+
+Source:
+  - D-T fusion neutrons at 14.1 MeV, isotropic emission
+  - Uniformly distributed in plasma volume (R = 460-780 cm, Z = -160
+    to +160 cm, phi = 0 to 40 degrees)
+
+Reference values (from ITER design analyses):
+  - Peak neutron wall loading (outboard midplane): ~1.0 MW/m^2
+  - Average neutron wall loading: ~0.56 MW/m^2
+  - Nuclear heating in blanket: ~85% of neutron power (~340 MW)
+  - TF coil nuclear heating: < 10-20 kW (design limit for cryogenics)
+  - Fast neutron fluence at TF coil (E > 0.1 MeV): < 10^22 n/m^2 lifetime
+  - Shielding attenuation factor: ~10^10 (plasma to TF coil)
+
+Key references:
+  ITER Organization, "ITER Research Plan within the Staged Approach,"
+  ITR-18-003, 2018.
+
+  M.J. Loughlin et al., "ITER Nuclear Analysis Strategy and Requirements,"
+  Fusion Sci. Technol., vol. 56, no. 2, pp. 566-572, 2009.
+
+  R. Juarez et al., "Shutdown dose rate calculations at ITER equatorial
+  port using MCNP," Fusion Eng. Des., vol. 100, pp. 501-506, 2015.
+
+  Y. Chen, U. Fischer, "Rigorous MCNP based shutdown dose rate
+  calculations: computational scheme, verification calculations and
+  application to ITER," Fusion Eng. Des., vol. 63-64, pp. 107-114, 2002.
+
+  A. Serikov et al., "Nuclear analysis of ITER port plugs," Fusion Eng.
+  Des., vol. 87, pp. 1458-1462, 2012.
+
+  ITER Physics Basis, Nucl. Fusion, vol. 39, no. 12, pp. 2137-2638, 1999.

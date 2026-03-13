@@ -1,0 +1,83 @@
+ST-FNSF Benchmark: Spherical Tokamak Fusion Nuclear Science Facility
+======================================================================
+
+Source:      Princeton Plasma Physics Laboratory (PPPL)
+             J. E. Menard et al., Nuclear Fusion, 2016
+
+URL:
+  https://doi.org/10.1088/0029-5515/56/10/106023
+
+Description:
+  The Spherical Tokamak Fusion Nuclear Science Facility (ST-FNSF) is a
+  compact fusion device concept designed as a stepping stone between
+  present-day experiments and a demonstration power plant (DEMO). It
+  operates at very low aspect ratio (A = 1.7), producing a compact
+  device with a major radius of only 1.7 m.
+
+  The ST-FNSF concept is designed to produce 60-100 MW of fusion power
+  with a neutron wall loading of approximately 1.0 MW/m^2. It serves as
+  a facility to test tritium breeding blanket modules, qualify materials
+  under fusion neutron irradiation, and validate nuclear data and codes.
+
+  The key neutronics challenge of the spherical tokamak is the extremely
+  compact center column. The distance from the tokamak axis to the
+  plasma inner edge is only 70 cm, leaving very limited space for
+  shielding. There is no room for a breeding blanket on the inboard
+  side, so all tritium breeding must occur on the outboard.
+
+Device Parameters:
+  Major radius:      R0 = 1.7 m (170 cm)
+  Minor radius:      a  = 1.0 m (100 cm)
+  Aspect ratio:      A  = 1.7
+  Elongation:        kappa = 2.8
+  Fusion power:      60-100 MW (FNSF phase)
+  Neutron wall load: ~1.0 MW/m^2
+  TF coils:          12 (30-degree sector symmetry)
+
+Geometry:
+  This OpenMC model uses a simplified CSG representation of one
+  30-degree toroidal sector with reflective boundary conditions.
+
+  Inboard (R < 170 cm):
+    - Copper center post:    R = 0 to 50 cm
+    - WC+water shield:       R = 50 to 70 cm
+    - Plasma (void):         R = 70 to 170 cm
+
+  Outboard (R > 170 cm):
+    - Plasma (void):         R = 170 to 270 cm
+    - F82H first wall:       3 cm thick
+    - DCLL blanket:          60 cm thick (LiPb + RAFM + He)
+    - WC+water shield:       30 cm thick
+    - SS316 vacuum vessel:   18 cm thick
+
+Materials:
+  - Copper (8.96 g/cm3): center post TF coil conductor
+  - WC + 20% water (12.7 g/cm3): neutron shield
+  - F82H RAFM steel (7.89 g/cm3): first wall structure
+  - DCLL homogenized (7.1 g/cm3): 25% RAFM + 65% LiPb + 10% He
+  - Pb-17Li with 90% Li-6 enrichment (9.4 g/cm3): breeder
+  - SS316 (7.93 g/cm3): vacuum vessel
+
+Measured/Expected Quantities:
+  - Tritium Breeding Ratio (TBR): ~1.0 (marginal, no inboard blanket)
+  - Nuclear heating in all components
+  - Center column neutron flux and spectrum
+  - Fast flux at TF coil region
+  - Neutron wall loading asymmetry (inboard vs outboard)
+
+Cross Sections:
+  ENDF/B-VIII.0 at 600 K
+
+Key References:
+  J. E. Menard et al., "Fusion Nuclear Science Facilities and Pilot
+  Plants Based on the Spherical Tokamak," Nuclear Fusion, vol. 56,
+  no. 10, p. 106023, 2016.
+  DOI: 10.1088/0029-5515/56/10/106023
+
+  J. E. Menard et al., "Prospects for Pilot Plants Based on the
+  Tokamak, Spherical Tokamak and Stellarator," Nuclear Fusion, vol. 51,
+  no. 10, p. 103014, 2011.
+
+  C. E. Kessel et al., "The Fusion Nuclear Science Facility, the
+  Critical Step in the Pathway to Fusion Energy," Fusion Science and
+  Technology, vol. 68, no. 2, pp. 225-236, 2015.

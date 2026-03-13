@@ -1,0 +1,73 @@
+McSAFER NuScale-like SMR Full-Core Neutronics Benchmark
+========================================================
+
+Paper:    "Neutronics Benchmark of the NuScale-like SMR in the McSAFER Project"
+Authors:  J. Bousquet et al.
+Journal:  Journal of Nuclear Engineering, 2025, 6(4), 44
+URL:      https://www.mdpi.com/2673-4362/6/4/44
+
+Project:  McSAFER (Multi-Criteria Analysis of Safety, Environmental, and
+          Financial aspects of Energy systems based on Renewable sources
+          and small modular Reactors)
+Funding:  EU Horizon 2020 (Grant Agreement No. 945063)
+
+Description
+-----------
+This benchmark defines a NuScale-like Small Modular Reactor (SMR) full core
+for code-to-code comparison of neutronics calculations. The NuScale Power
+Module is a 77 MWe (160-250 MWth) integral pressurized water reactor
+designed for factory fabrication and modular deployment.
+
+This is the FULL CORE model with all 37 fuel assemblies, as opposed to the
+single-assembly infinite-lattice model in ../nuscale_smr/.
+
+Key Design Features
+-------------------
+- 37 fuel assemblies in a 7x7 grid (corners removed)
+  -- smallest full-core reactor benchmark
+- 17x17 Westinghouse-type fuel assemblies
+- 3 enrichment zones: 1.6%, 2.4%, 3.1% wt U-235
+- Short active fuel length: 200 cm (vs ~366 cm in a standard PWR)
+- Natural circulation primary cooling (no reactor coolant pumps)
+- BORON-FREE OPERATION: no dissolved boric acid in the moderator
+- Core barrel (SS304) with water downcomer
+
+Core Loading Pattern
+--------------------
+    Row 0:   _    _    3    3    3    _    _
+    Row 1:   _    3    2    2    2    3    _
+    Row 2:   3    2    1    1    1    2    3
+    Row 3:   3    2    1    1    1    2    3
+    Row 4:   3    2    1    1    1    2    3
+    Row 5:   _    3    2    2    2    3    _
+    Row 6:   _    _    3    3    3    _    _
+
+    1 = 1.6 wt% U-235 (9 assemblies, center)
+    2 = 2.4 wt% U-235 (12 assemblies, middle ring)
+    3 = 3.1 wt% U-235 (16 assemblies, outer ring)
+    _ = water (no assembly)
+
+Simplifications in This Model
+------------------------------
+- Gd2O3 burnable absorber pins are omitted (the original benchmark has
+  7 assembly types with varying Gd content)
+- Only 3 assembly types differentiated by enrichment
+- HZP conditions (fuel and moderator at same temperature)
+- 2D model with reflective axial BCs (no axial reflector modeled)
+
+Reference Solution
+------------------
+Code:     Serpent 2 / SCALE KENO-VI (continuous-energy Monte Carlo)
+Library:  ENDF/B-VII.1, JEFF-3.3, ENDF/B-VIII.0 (varies by participant)
+k-eff:    ~1.01-1.03 (HZP, ARO, fresh fuel, full benchmark spec)
+          Note: without Gd2O3, k-eff will be somewhat higher
+
+Multiple participants calculated this benchmark:
+  - Serpent 2 (VTT, reference solution)
+  - OpenMC
+  - MCNP
+  - SCALE/KENO-VI (agrees within 44 pcm of Serpent)
+  - MORET
+  - Various deterministic codes
+
+Reported code-to-code differences are on the order of 44-500 pcm.

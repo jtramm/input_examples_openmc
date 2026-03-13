@@ -1,0 +1,86 @@
+ARC Reactor Fusion Neutronics Benchmark
+========================================
+
+Design:     ARC (Affordable, Robust, Compact) tokamak
+Origin:     MIT Plasma Science and Fusion Center (PSFC)
+Type:       Compact high-field D-T fusion pilot plant concept
+
+URL:
+  https://doi.org/10.1016/j.fusengdes.2015.07.008  (Sorbom et al. 2015)
+  https://doi.org/10.1016/j.fusengdes.2018.09.007  (Kuang et al. 2018)
+
+Description:
+  The ARC reactor is a compact tokamak concept that exploits
+  high-temperature superconducting (HTS) REBCO magnets to achieve a
+  toroidal field of 9.2 T on axis in a device with major radius
+  R = 3.3 m and minor radius a = 1.13 m. The design produces ~525 MW
+  of D-T fusion power.
+
+  The blanket uses molten FLiBe (Li2BeF4) as a combined tritium breeder,
+  neutron moderator, and primary coolant. The liquid salt fills an ~80 cm
+  thick annular region surrounding the plasma chamber. Tritium is bred
+  via Li-6(n,t)He-4 and Li-7(n,n't)He-4 reactions, while Be-9 provides
+  neutron multiplication via (n,2n).
+
+  The neutronics model is a 20-degree toroidal sector (1/18 of the full
+  torus, corresponding to one TF coil period) with reflective boundary
+  conditions. The cross-section is built from concentric ZTorus surfaces
+  with circular profiles.
+
+Geometry (radial build from plasma axis outward):
+  - Plasma:        void, minor radius 113 cm
+  - First wall:    Inconel 718, 3 cm thick (113 - 116 cm)
+  - FLiBe blanket: Li2BeF4 molten salt, 80 cm thick (116 - 196 cm)
+  - Vacuum vessel: Inconel 718, 10 cm thick (196 - 206 cm)
+  - Neutron shield: Borated steel (2 wt% B), 10 cm thick (206 - 216 cm)
+  - TF coil:       Cu/SS/HTS composite, 30 cm thick (216 - 246 cm)
+
+Device parameters:
+  - Major radius:      R = 3.3 m
+  - Minor radius:      a = 1.13 m
+  - Elongation:        kappa = 1.84
+  - Triangularity:     delta = 0.52
+  - Toroidal field:    B_T = 9.2 T (on axis)
+  - Fusion power:      ~525 MW
+  - TF coils:          18
+
+Key neutronics quantities:
+  - Tritium Breeding Ratio (TBR): ~1.05 - 1.10 with natural Li
+    (TBR ~1.30 with 90% enriched Li-6)
+  - Three independent Monte Carlo codes agreed within 0.6%
+
+Materials:
+  - FLiBe (Li2BeF4): density 1.94 g/cm^3, natural Li (7.5% Li-6)
+  - Inconel 718: density 8.19 g/cm^3
+  - Borated steel: SS316-type + 2 wt% natural boron, density 7.65 g/cm^3
+  - TF coil composite: 40% Cu / 50% SS / 10% Ni (Hastelloy), density 8.0 g/cm^3
+
+Source:
+  - D-T fusion neutrons at 14.1 MeV
+  - Distributed uniformly in cylindrical annulus: R in [300, 360] cm,
+    Z in [-50, 50] cm, phi in [0, 20 deg]
+  - Isotropic angular distribution
+
+Cross-section data:
+  - ENDF/B-VIII.0
+
+Key references:
+  B. N. Sorbom, J. Ball, T. R. Palmer, F. J. Mangiarotti, J. M. Sierchio,
+  P. Bonoli, C. Kasten, D. A. Sutherland, H. S. Barnard, C. B. Haakonsen,
+  J. Goh, C. Sung, D. G. Whyte, "ARC: A compact, high-field, fusion nuclear
+  science facility and demonstration power plant with demountable magnets,"
+  Fusion Eng. Des., vol. 100, pp. 378-405, 2015.
+
+  A. Q. Kuang, N. M. Cao, A. J. Creely, C. A. Dennett, J. Hecla,
+  B. LaBombard, R. A. Tinguely, E. A. Tolman, H. Hoffman, M. Major,
+  J. Ruiz Ruiz, D. Brunner, P. Grover, C. Laughman, B. N. Sorbom,
+  D. G. Whyte, "Conceptual design study for heat exhaust management in
+  the ARC fusion pilot plant," Fusion Eng. Des., vol. 137,
+  pp. 221-242, 2018.
+
+  J. H. Bae, G. P. Peterson, T. Shimwell, "Benchmarking of tritium
+  breeding ratio calculations for the ARC reactor," Fusion Sci. Technol.,
+  2022. (Three codes -- MCNP, Serpent, OpenMC -- agreed within 0.6%.)
+
+  SINBAD Compilation, "Fusion Neutronics Benchmark Experiments,"
+  NEA/NSC/DOC, OECD Nuclear Energy Agency.

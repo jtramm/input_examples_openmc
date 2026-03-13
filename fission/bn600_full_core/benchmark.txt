@@ -1,0 +1,91 @@
+BN-600 Sodium-Cooled Fast Reactor Full-Core Benchmark
+======================================================
+
+Full Name:
+    BN-600 Hybrid Core Neutronics Benchmark - Full Core Model
+
+Reference:
+    IAEA-TECDOC-1623, "Benchmark Analyses on the Natural Circulation Test
+    Performed During the PHENIX End-of-Life Experiments," International
+    Atomic Energy Agency, Vienna, 2009.
+
+    Additional references from the IAEA fast reactor benchmark series:
+    - IAEA-TECDOC-1524, "Benchmark Analyses of Sodium Natural Convection
+      in the Upper Plenum of the Monju Reactor Vessel"
+    - A.K. Popov et al., "BN-600 Hybrid Core Benchmark Analysis,"
+      Proc. International Conference on Fast Reactors and Related Fuel
+      Cycles (FR17), IAEA-CN-245, Yekaterinburg, Russia, 2017.
+
+Facility:
+    BN-600 (Beloyarsk Nuclear Power Plant, Unit 3)
+    Beloyarsk, Sverdlovsk Oblast, Russia
+    Operated by Rosenergoatom (Rosatom State Corporation)
+    In commercial operation since April 1980
+
+Reactor Description:
+    BN-600 is a pool-type sodium-cooled fast breeder reactor producing
+    1470 MWth / 600 MWe. It is one of the largest and longest-operating
+    fast reactors in the world. The reactor uses a three-loop primary
+    sodium circuit with intermediate heat exchangers and steam generators.
+
+    Key design parameters:
+    - Thermal power: 1470 MW
+    - Electrical power: 600 MW
+    - Coolant: liquid sodium
+    - Core inlet temperature: ~650 K
+    - Core outlet temperature: ~790 K
+    - Fuel: UO2 (enriched uranium oxide)
+    - Cladding: Cr16Ni15Mo3 stainless steel
+    - Core height (active fuel): ~100 cm
+    - Core diameter (equivalent): ~200 cm
+
+Core Description (Hybrid Core Configuration):
+    The BN-600 hybrid core uses three enrichment zones of UO2 fuel:
+    - LEZ (Low Enrichment Zone): 17.0 wt% U-235, inner core
+    - MEZ (Medium Enrichment Zone): 21.0 wt% U-235, middle core
+    - HEZ (High Enrichment Zone): 26.0 wt% U-235, outer core
+
+    The three-zone enrichment scheme flattens the radial power distribution,
+    which is essential for achieving acceptable peak-to-average power ratios
+    in fast reactor cores where radial neutron leakage is significant.
+
+    The core is surrounded by radial blanket assemblies (depleted UO2,
+    0.3 wt% U-235) and axial blanket regions (30 cm above and below
+    the active fuel) for breeding.
+
+    Each fuel assembly contains 127 wire-wrapped fuel pins in a hexagonal
+    arrangement with pin pitch of 0.75 cm and assembly flat-to-flat of
+    9.6 cm (assembly pitch 9.82 cm center-to-center).
+
+Reference Results (Various codes, IAEA benchmark exercise):
+    k-eff (all rods out, beginning of cycle):
+    - ECCO/ERANOS:    ~1.040 - 1.050
+    - MCNP:           ~1.042 - 1.058
+    - SERPENT:         ~1.045 - 1.055
+    - General range:   1.04 - 1.06
+    - Code spread:    ~500 - 1000 pcm
+
+    The excess reactivity is compensated by control and safety rods
+    during normal operation. The operating k-eff is maintained at 1.000
+    through control rod insertion.
+
+    Differences between codes arise from:
+    - Nuclear data library choice (ENDF/B, JEFF, JENDL, BROND)
+    - Geometry modeling detail (heterogeneous vs. homogenized)
+    - Resonance self-shielding treatment
+    - Energy group structure (deterministic codes)
+    - Control rod modeling (this benchmark: all rods withdrawn)
+
+This Model:
+    Full-core 3D model with explicit pin-level detail in each assembly.
+    Uses openmc.HexLattice at two levels: pin lattice within assemblies
+    and assembly lattice for the core. Includes axial blanket regions
+    and radial blanket assemblies. Vacuum boundary conditions.
+
+    Simplifications relative to the actual BN-600:
+    - Control rod positions modeled as fuel assemblies (ARO condition)
+    - No sodium plenum regions above/below blankets
+    - No steel shielding assemblies
+    - Uniform temperature (600 K HZP approximation)
+    - No wire wrap modeled (smeared into coolant)
+    - Simplified ring-based enrichment zone assignment

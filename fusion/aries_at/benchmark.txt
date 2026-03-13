@@ -1,0 +1,68 @@
+ARIES-AT Advanced Tokamak Fusion Power Plant
+===============================================
+
+Source:      ARIES Project (Advanced Reactor Innovation and Evaluation Studies)
+             University of California San Diego, in collaboration with national
+             laboratories and universities under US DOE support
+
+Description:
+  ARIES-AT (Advanced Tokamak) is a conceptual design study for an advanced
+  commercial fusion power plant. It represents the most optimistic end of the
+  tokamak design space, assuming advanced physics (high beta, high bootstrap
+  current fraction) and advanced technology (SiC/SiC composites, high-
+  temperature Brayton cycle). The design achieves 1755 MW fusion power in a
+  compact device (R = 5.2 m, a = 1.3 m) with a cost of electricity competitive
+  with other advanced energy sources.
+
+  The blanket concept uses SiC composite as the structural material and
+  Pb-17Li (lead-lithium eutectic) as both the tritium breeder and primary
+  coolant. Lithium is enriched to 90% Li-6 for high tritium breeding ratio.
+  Neutron multiplication is provided by the Pb(n,2n) reaction in the lead
+  component of the Pb-17Li alloy.
+
+  This model implements a simplified CSG toroidal sector for neutronics
+  scoping calculations.
+
+Device Parameters:
+  - Major radius: 5.2 m (520 cm)
+  - Minor radius: 1.3 m (130 cm)
+  - Elongation: 2.2
+  - Fusion power: 1755 MW
+  - Neutron wall loading: ~3.2 MW/m2 (outboard midplane)
+  - Bootstrap current fraction: 91%
+  - Plasma beta: 9.2%
+  - TF coils: 16
+  - Net electric power: ~1000 MWe
+  - Thermal efficiency: ~59% (Brayton cycle)
+
+Radial Build:
+  - First wall: SiC composite, 0.4 cm
+  - Blanket: SiC/LiPb (40% SiC, 55% LiPb, 5% void), 30 cm
+  - Back wall/manifold: SiC/LiPb, 10 cm
+  - Shield: WC/H2O (80/20 vol%), 25 cm
+  - Vacuum vessel: F82H ferritic steel, 15 cm
+  - TF coil: Nb3Sn/Cu/SS316, 30 cm
+
+Reference Results (neutronics):
+  - TBR with 90% Li-6 enrichment: ~1.1
+  - Energy multiplication factor: ~1.15
+  - Blanket captures ~70% of fusion energy
+  - Peak neutron wall loading: ~3.2 MW/m2
+
+Key References:
+  F. Najmabadi et al., "The ARIES-AT advanced tokamak, Advanced technology
+  fusion power plant," Fusion Engineering and Design, vol. 80, pp. 3-23,
+  2006.
+
+  M.S. Tillack et al., "Fusion power core engineering for the ARIES-AT
+  power plant," Fusion Engineering and Design, vol. 80, pp. 71-85, 2006.
+
+  A.R. Raffray et al., "Engineering design and analysis of the ARIES-AT
+  blanket," Fusion Engineering and Design, vol. 80, pp. 79-98, 2006.
+
+  M.E. Sawan, M.A. Abdou, "Physics and technology conditions for attaining
+  tritium self-sufficiency for the DT fuel cycle," Fusion Engineering and
+  Design, vol. 81, pp. 1131-1144, 2006.
+
+  L.A. El-Guebaly et al., "Nuclear performance assessment of ARIES-AT,"
+  Fusion Engineering and Design, vol. 80, pp. 99-110, 2006.
