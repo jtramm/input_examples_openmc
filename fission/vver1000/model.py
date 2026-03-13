@@ -313,32 +313,20 @@ def build_model(enrichment=3.0, particles=10000, batches=110, inactive=10):
         name='Central Tube', cells=[ct_inner, ct_wall, ct_outer]
     )
 
-    # --- Absorber Guide Tube Universe ---
-    # Each guide tube contains a B4C absorber pellet inside a steel tube,
-    # with a water gap between the absorber cladding and the guide tube,
-    # and the guide tube itself is a steel tube.
+    # --- Guide Tube Universe (rods WITHDRAWN) ---
+    # For the critical configuration, absorber rods are WITHDRAWN.
+    # The guide tubes are simply steel tubes filled with water (moderator).
     # Structure (inside-out):
-    #   1. B4C absorber pellet
-    #   2. Steel absorber cladding
-    #   3. Water gap
-    #   4. Steel guide tube wall
-    #   5. Surrounding moderator
-    abs_ir_surf = openmc.ZCylinder(r=abs_ir)
-    abs_clad_or_surf = openmc.ZCylinder(r=abs_clad_or)
+    #   1. Water (inside guide tube - where withdrawn rod would be)
+    #   2. Steel guide tube wall
+    #   3. Surrounding moderator
+    # Note: With rods inserted (B4C), k-eff drops to ~0.84 — far subcritical.
     gt_ir_surf = openmc.ZCylinder(r=gt_ir)
     gt_or_surf = openmc.ZCylinder(r=gt_or)
 
-    abs_pellet = openmc.Cell(name='absorber pellet')
-    abs_pellet.region = -abs_ir_surf
-    abs_pellet.fill = b4c
-
-    abs_clad = openmc.Cell(name='absorber cladding')
-    abs_clad.region = +abs_ir_surf & -abs_clad_or_surf
-    abs_clad.fill = zirc
-
-    abs_gap = openmc.Cell(name='absorber-guide tube gap')
-    abs_gap.region = +abs_clad_or_surf & -gt_ir_surf
-    abs_gap.fill = water
+    gt_inner_water = openmc.Cell(name='guide tube water (rod withdrawn)')
+    gt_inner_water.region = -gt_ir_surf
+    gt_inner_water.fill = water
 
     gt_wall = openmc.Cell(name='guide tube wall')
     gt_wall.region = +gt_ir_surf & -gt_or_surf
@@ -349,8 +337,8 @@ def build_model(enrichment=3.0, particles=10000, batches=110, inactive=10):
     gt_outer.fill = water
 
     guide_tube_univ = openmc.Universe(
-        name='Absorber Guide Tube',
-        cells=[abs_pellet, abs_clad, abs_gap, gt_wall, gt_outer]
+        name='Guide Tube (Withdrawn)',
+        cells=[gt_inner_water, gt_wall, gt_outer]
     )
 
     # =========================================================================

@@ -580,9 +580,18 @@ def build_homogeneous_model(fuel_salt, graphite, hastelloy):
         -90, 90, -90, 90, -135, 135,
         boundary_type="vacuum",
     )
+    # The void fills all space inside the bounding box that is NOT occupied
+    # by any vessel component. This includes:
+    #   - The annular region outside the vessel (radially)
+    #   - The space above and below the vessel caps
+    cap_top = openmc.ZPlane(z0=121.92)
+    cap_bottom = openmc.ZPlane(z0=-121.92)
     void_cell = openmc.Cell(name="External Void")
-    # The void region is everything inside the bounding box but outside the vessel
-    void_cell.region = -outer_bound & +vessel_outer_radius
+    void_cell.region = -outer_bound & (
+        +vessel_outer_radius |  # outside vessel radially (at vessel height)
+        +cap_top |              # above the top cap
+        -cap_bottom             # below the bottom cap
+    )
 
     # Build the universe with all cells including the void
     root_universe = openmc.Universe(
