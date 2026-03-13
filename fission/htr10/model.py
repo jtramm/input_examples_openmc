@@ -8,6 +8,13 @@ bed high-temperature gas-cooled reactor (HTGR) that achieved first criticality
 at Tsinghua University's Institute of Nuclear and New Energy Technology
 (INET) in December 2000.
 
+STATUS: The TRISO random packing model currently has geometry issues
+(lost particles at TRISO sphere boundaries). This is a known challenge
+with explicit random TRISO packing — the pack_trisos() function can
+create edge cases where particles get lost between spheres. Future work:
+try using lattice-based TRISO placement or increase the packing domain
+to avoid boundary effects.
+
 Background on Pebble Bed Reactors
 ----------------------------------
 Pebble bed reactors are a type of Very High Temperature Reactor (VHTR) in
@@ -525,6 +532,9 @@ def build_pin_model(mats, particles, batches, inactive):
         ),
         constraints={'fissionable': True}
     )
+    # TRISO packing fraction is low (~5% volume is UO2 kernels), so most
+    # initial source sites will land in graphite. Lower the rejection threshold.
+    settings.source_rejection_fraction = 0.0001
     settings.temperature = {'method': 'interpolation'}
     model.settings = settings
 
