@@ -146,7 +146,8 @@ inboard_shield = openmc.Material(name="WC + water inboard shield")
 # Weight fraction WC = 12.504 / 12.704 = 0.9843
 # Weight fraction H2O = 0.200 / 12.704 = 0.0157
 inboard_shield.add_element("W", 0.9343, "wo")   # tungsten in WC
-inboard_shield.add_element("C", 0.0500, "wo")   # carbon in WC
+inboard_shield.add_nuclide("C12", 0.0500 * 0.9893, "wo")  # carbon-12 in WC
+inboard_shield.add_nuclide("C13", 0.0500 * 0.0107, "wo")  # carbon-13 in WC
 inboard_shield.add_nuclide("H1", 0.0022, "wo")  # hydrogen in water
 inboard_shield.add_nuclide("O16", 0.0135, "wo") # oxygen in water
 inboard_shield.set_density("g/cm3", 12.7)
@@ -165,7 +166,8 @@ f82h.add_element("V",  0.0020, "wo")
 f82h.add_element("Ta", 0.0004, "wo")
 f82h.add_element("Mn", 0.0010, "wo")
 f82h.add_element("Si", 0.0010, "wo")
-f82h.add_element("C",  0.0100, "wo")
+f82h.add_nuclide("C12", 0.0100 * 0.9893, "wo")  # carbon-12
+f82h.add_nuclide("C13", 0.0100 * 0.0107, "wo")  # carbon-13
 f82h.set_density("g/cm3", 7.89)
 
 # --- LiPb (Pb-17Li) breeder ---
@@ -211,7 +213,8 @@ dcll_blanket.add_element("V",  0.0005, "wo")
 dcll_blanket.add_element("Ta", 0.0001, "wo")
 dcll_blanket.add_element("Mn", 0.0002, "wo")
 dcll_blanket.add_element("Si", 0.0002, "wo")
-dcll_blanket.add_element("C",  0.0024, "wo")
+dcll_blanket.add_nuclide("C12", 0.0024 * 0.9893, "wo")  # carbon-12
+dcll_blanket.add_nuclide("C13", 0.0024 * 0.0107, "wo")  # carbon-13
 # LiPb portion (75.59 wt%)
 dcll_blanket.add_nuclide("Li6", 0.7559 * 0.17 * 0.90 * 6.015 / 175.82, "wo")
 dcll_blanket.add_nuclide("Li7", 0.7559 * 0.17 * 0.10 * 7.016 / 175.82, "wo")
@@ -221,7 +224,8 @@ dcll_blanket.set_density("g/cm3", 7.1)
 # --- WC + water outboard shield (same composition as inboard) ---
 outboard_shield = openmc.Material(name="WC + water outboard shield")
 outboard_shield.add_element("W", 0.9343, "wo")
-outboard_shield.add_element("C", 0.0500, "wo")
+outboard_shield.add_nuclide("C12", 0.0500 * 0.9893, "wo")  # carbon-12
+outboard_shield.add_nuclide("C13", 0.0500 * 0.0107, "wo")  # carbon-13
 outboard_shield.add_nuclide("H1", 0.0022, "wo")
 outboard_shield.add_nuclide("O16", 0.0135, "wo")
 outboard_shield.set_density("g/cm3", 12.7)
@@ -237,7 +241,8 @@ ss316.add_element("Ni", 0.12000, "wo")
 ss316.add_element("Mo", 0.02500, "wo")
 ss316.add_element("Mn", 0.02000, "wo")
 ss316.add_element("Si", 0.01000, "wo")
-ss316.add_element("C",  0.00080, "wo")
+ss316.add_nuclide("C12", 0.00080 * 0.9893, "wo")  # carbon-12
+ss316.add_nuclide("C13", 0.00080 * 0.0107, "wo")  # carbon-13
 ss316.add_element("N",  0.00025, "wo")
 ss316.set_density("g/cm3", 7.93)
 
@@ -760,4 +765,6 @@ print(f"  Cross sections:    ENDF/B-VIII.0")
 print(f"  Tallies:           TBR, heating (6 components), flux spectra")
 print("=" * 70)
 print("XML files written: materials.xml, geometry.xml, settings.xml, tallies.xml")
-print("Run with: openmc")
+print(f"\nRunning simulation...")
+openmc.run()
+print("Simulation complete.")

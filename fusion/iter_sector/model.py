@@ -211,7 +211,8 @@ ss316ln.add_element("Mo", 0.0250, "wo")   # molybdenum
 ss316ln.add_element("Mn", 0.0200, "wo")   # manganese
 ss316ln.add_element("Si", 0.0100, "wo")   # silicon
 ss316ln.add_element("N",  0.0015, "wo")   # nitrogen
-ss316ln.add_element("C",  0.0003, "wo")   # carbon
+ss316ln.add_nuclide("C12", 0.0003 * 0.9893, "wo")  # carbon-12
+ss316ln.add_nuclide("C13", 0.0003 * 0.0107, "wo")  # carbon-13
 ss316ln.set_density("g/cm3", 7.93)
 
 # --- 4. Blanket / VV fill: homogenized SS316LN + H2O (60/40 vol%) ---
@@ -241,7 +242,8 @@ blanket_fill.add_element("Mo", 0.0250 * ss_wt_frac, "wo")
 blanket_fill.add_element("Mn", 0.0200 * ss_wt_frac, "wo")
 blanket_fill.add_element("Si", 0.0100 * ss_wt_frac, "wo")
 blanket_fill.add_element("N",  0.0015 * ss_wt_frac, "wo")
-blanket_fill.add_element("C",  0.0003 * ss_wt_frac, "wo")
+blanket_fill.add_nuclide("C12", 0.0003 * ss_wt_frac * 0.9893, "wo")  # carbon-12
+blanket_fill.add_nuclide("C13", 0.0003 * ss_wt_frac * 0.0107, "wo")  # carbon-13
 # Add water components
 blanket_fill.add_element("H",  (2 * 1.008 / 18.015) * h2o_wt_frac, "wo")
 blanket_fill.add_element("O",  (15.999 / 18.015) * h2o_wt_frac, "wo")
@@ -286,7 +288,8 @@ tf_winding.add_element("Mo", 0.0250 * tf_ss_wf, "wo")
 tf_winding.add_element("Mn", 0.0200 * tf_ss_wf, "wo")
 tf_winding.add_element("Si", 0.0100 * tf_ss_wf, "wo")
 tf_winding.add_element("N",  0.0015 * tf_ss_wf, "wo")
-tf_winding.add_element("C",  0.0003 * tf_ss_wf, "wo")
+tf_winding.add_nuclide("C12", 0.0003 * tf_ss_wf * 0.9893, "wo")  # carbon-12
+tf_winding.add_nuclide("C13", 0.0003 * tf_ss_wf * 0.0107, "wo")  # carbon-13
 # Copper in the winding pack
 tf_winding.add_element("Cu", tf_cu_wf, "wo")
 # Niobium and tin (Nb3Sn superconductor)
@@ -505,7 +508,7 @@ settings.source = source
 settings.particles = args.particles
 settings.batches = args.batches
 settings.photon_transport = False
-settings.temperature = {"default": 400.0}
+settings.temperature = {"method": "interpolation", "default": 400.0}
 settings.output = {"tallies": True}
 
 # --- Weight windows ---
@@ -763,4 +766,6 @@ else:
     print(f"  Small tallies:     {args.small_tallies}")
     print("=" * 72)
     print("XML files written: materials.xml, geometry.xml, settings.xml, tallies.xml")
-    print("Run with: openmc")
+    print(f"\nRunning simulation...")
+    model.run()
+    print("Simulation complete.")

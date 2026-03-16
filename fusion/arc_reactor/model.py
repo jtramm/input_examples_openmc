@@ -165,7 +165,8 @@ inconel718.add_element("Nb", 0.051, "wo")   # niobium (columbium)
 inconel718.add_element("Mo", 0.030, "wo")   # molybdenum
 inconel718.add_element("Ti", 0.009, "wo")   # titanium
 inconel718.add_element("Al", 0.005, "wo")   # aluminium
-inconel718.add_element("C", 0.0004, "wo")   # carbon
+inconel718.add_nuclide("C12", 0.0004 * 0.9893, "wo")  # carbon-12
+inconel718.add_nuclide("C13", 0.0004 * 0.0107, "wo")  # carbon-13
 # Remaining 0.46% approximated as Mn + Si
 inconel718.add_element("Mn", 0.003, "wo")   # manganese
 inconel718.add_element("Si", 0.0016, "wo")  # silicon
@@ -287,7 +288,7 @@ bounding_sphere = openmc.Sphere(
 # the region is: +sector_plane_1 AND -sector_plane_2
 # (positive half-space of y=0 plane AND negative half-space of the
 #  rotated plane)
-sector_region = +sector_plane_1 & -sector_plane_2
+sector_region = +sector_plane_1 & +sector_plane_2
 
 # --- Cells ---
 # Each cell is the region between consecutive torus surfaces, intersected

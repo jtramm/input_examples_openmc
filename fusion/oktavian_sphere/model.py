@@ -41,8 +41,9 @@ This benchmark is part of the SINBAD (Shielding Integral Benchmark Archive
 Database) collection maintained by the OECD Nuclear Energy Agency.
 
 This script builds the complete OpenMC model for the iron sphere case:
-  - Sphere radius: 50.32 cm
-  - Material: carbon steel (approximated as natural iron, 7.874 g/cc)
+  - Inner void radius: ~10 cm (central cavity for D-T target)
+  - Outer sphere radius: 50.32 cm
+  - Material: carbon steel (JIS SS41, ~98.69% Fe, 7.874 g/cc)
   - Source: 14.1 MeV isotropic point source at the origin
   - Tallies: surface current leakage spectrum and cell flux spectrum
 
@@ -105,29 +106,33 @@ def build_model(particles: int = 1_000_000) -> openmc.Model:
     # =========================================================================
     # Geometry
     # =========================================================================
-    # The geometry consists of three regions:
+    # The OKTAVIAN sphere is a HOLLOW shell, not a solid sphere.  The D-T
+    # target sits inside a central cavity, and the deuteron beam reaches it
+    # through a narrow re-entrant tube (not modeled here -- the benchmark
+    # MCNP deck typically omits the beam duct and uses a point source in the
+    # central void).
     #
-    #   1. The iron sphere itself (radius 50.32 cm, centered at origin).
-    #   2. A void region outside the sphere (vacuum -- no material).
-    #   3. An outer bounding sphere that serves as the "graveyard" -- any
-    #      particle that reaches this surface is terminated.  We place it
-    #      at 200 cm radius, well beyond the iron sphere.
+    # Four regions:
+    #   1. Central void cavity (r < 10 cm) -- houses the D-T target
+    #   2. Iron shell (10 cm < r < 50.32 cm) -- the test material
+    #   3. Outer void (50.32 cm < r < 200 cm)
+    #   4. Graveyard (r > 200 cm) -- vacuum boundary
     #
-    # In OpenMC, surfaces divide space into half-spaces.  For a sphere
-    # centered at the origin:
-    #   - The "negative" side (operator -) is the interior (r < R).
-    #   - The "positive" side (operator +) is the exterior (r > R).
+    # The inner cavity radius of ~10 cm is consistent with the general
+    # OKTAVIAN experimental design (20 cm diameter central void) used across
+    # multiple sphere materials (Al, Mn, Si, W).
 
     # --- Surfaces ---
+    inner_surface = openmc.Sphere(
+        r=10.0,
+        name="Inner void boundary (R = 10 cm)",
+    )
 
-    # Inner sphere surface (the physical iron sphere boundary)
-    sphere_surface = openmc.Sphere(
+    outer_shell_surface = openmc.Sphere(
         r=50.32,
         name="Iron sphere outer surface (R = 50.32 cm)",
     )
 
-    # Outer bounding sphere with vacuum boundary condition.
-    # Any particle crossing this surface is killed (removed from tracking).
     outer_surface = openmc.Sphere(
         r=200.0,
         boundary_type="vacuum",
@@ -136,20 +141,21 @@ def build_model(particles: int = 1_000_000) -> openmc.Model:
 
     # --- Cells ---
 
-    # Cell 1: The iron sphere.
-    # Region is the interior of the sphere surface (negative half-space).
-    iron_cell = openmc.Cell(name="Iron sphere")
-    iron_cell.region = -sphere_surface          # inside the sphere
-    iron_cell.fill = iron_steel                  # filled with carbon steel
+    # Cell 1: Central void cavity (source location)
+    void_inner = openmc.Cell(name="Central void (D-T target)")
+    void_inner.region = -inner_surface
 
-    # Cell 2: Void region between the iron sphere and the outer boundary.
-    # Region is outside the iron sphere AND inside the outer boundary.
-    # No material fill means vacuum.
+    # Cell 2: Iron shell
+    iron_cell = openmc.Cell(name="Iron shell")
+    iron_cell.region = +inner_surface & -outer_shell_surface
+    iron_cell.fill = iron_steel
+
+    # Cell 3: Outer void
     void_cell = openmc.Cell(name="Void (outside sphere)")
-    void_cell.region = +sphere_surface & -outer_surface  # between the two spheres
+    void_cell.region = +outer_shell_surface & -outer_surface
 
     # Build the universe and geometry
-    root_universe = openmc.Universe(cells=[iron_cell, void_cell])
+    root_universe = openmc.Universe(cells=[void_inner, iron_cell, void_cell])
     geometry = openmc.Geometry(root_universe)
 
     # =========================================================================
@@ -230,7 +236,7 @@ def build_model(particles: int = 1_000_000) -> openmc.Model:
     # --- Tally 1: Neutron leakage spectrum (surface current) ---
     # A surface current tally counts particles crossing a specified surface.
     # By adding an energy filter we get the leakage spectrum.
-    surface_filter = openmc.SurfaceFilter([sphere_surface])
+    surface_filter = openmc.SurfaceFilter([outer_shell_surface])
 
     leakage_tally = openmc.Tally(name="Neutron leakage spectrum")
     leakage_tally.filters = [surface_filter, energy_filter]
@@ -291,7 +297,8 @@ if __name__ == "__main__":
     print("=" * 70)
     print("OKTAVIAN Iron Sphere Benchmark")
     print("=" * 70)
-    print(f"  Sphere radius : 50.32 cm")
+    print(f"  Inner radius  : 10.0 cm (central void)")
+    print(f"  Outer radius  : 50.32 cm")
     print(f"  Material      : Carbon steel (7.874 g/cc)")
     print(f"  Source energy  : 14.1 MeV (D-T)")
     print(f"  Particles     : {args.particles:,}")

@@ -182,7 +182,8 @@ clf1_steel.add_element("W",  0.015, "wo")   # 1.5% tungsten (low activation)
 clf1_steel.add_element("V",  0.002, "wo")   # 0.2% vanadium
 clf1_steel.add_element("Ta", 0.001, "wo")   # 0.1% tantalum
 clf1_steel.add_element("Mn", 0.005, "wo")   # 0.5% manganese
-clf1_steel.add_element("C",  0.001, "wo")   # 0.1% carbon
+clf1_steel.add_nuclide("C12", 0.001 * 0.9893, "wo")  # carbon-12
+clf1_steel.add_nuclide("C13", 0.001 * 0.0107, "wo")  # carbon-13
 clf1_steel.add_element("Si", 0.001, "wo")   # 0.1% silicon
 clf1_steel.set_density("g/cm3", 7.8)
 
@@ -453,7 +454,7 @@ boundary_sphere = openmc.Sphere(
 # For phi=22.5 plane: the sector is on the -halfspace side (toward phi=0).
 def in_sector():
     """Return the angular region defining the 22.5-degree sector."""
-    return +plane_phi0 & -plane_phi22
+    return +plane_phi0 & +plane_phi22
 
 
 # =============================================================================
@@ -825,4 +826,6 @@ print(f"  Tallies:             TBR, nuclear heating, Be(n,2n), fast flux, "
       f"blanket spectrum")
 print("=" * 72)
 print("XML files written: materials.xml, geometry.xml, settings.xml, tallies.xml")
-print("Run with: openmc")
+print(f"\nRunning simulation...")
+model.run()
+print("Simulation complete.")

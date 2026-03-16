@@ -198,7 +198,8 @@ material_temperature = 800.0  # K
 # consume neutrons without producing tritium.
 sic = openmc.Material(name="SiC composite")
 sic.add_element("Si", 50.0, "ao")   # 50 atom% silicon
-sic.add_element("C", 50.0, "ao")    # 50 atom% carbon
+sic.add_nuclide("C12", 50.0 * 0.9893, "ao")  # carbon-12
+sic.add_nuclide("C13", 50.0 * 0.0107, "ao")  # carbon-13
 sic.set_density("g/cm3", 3.2)
 sic.temperature = material_temperature
 
@@ -271,7 +272,8 @@ backwall_mat.temperature = material_temperature
 # WC composition: W:C = 50:50 atomic ratio
 wc = openmc.Material(name="Tungsten carbide (WC)")
 wc.add_element("W", 50.0, "ao")
-wc.add_element("C", 50.0, "ao")
+wc.add_nuclide("C12", 50.0 * 0.9893, "ao")  # carbon-12
+wc.add_nuclide("C13", 50.0 * 0.0107, "ao")  # carbon-13
 wc.set_density("g/cm3", 15.63)
 
 water = openmc.Material(name="Water (H2O)")
@@ -310,7 +312,8 @@ f82h.add_element("V", 0.2, "wo")       # 0.2 wt% vanadium
 f82h.add_element("Ta", 0.04, "wo")     # 0.04 wt% tantalum
 f82h.add_element("Mn", 0.1, "wo")      # 0.1 wt% manganese
 f82h.add_element("Si", 0.16, "wo")     # 0.16 wt% silicon (adjusted for balance)
-f82h.add_element("C", 0.1, "wo")       # 0.1 wt% carbon
+f82h.add_nuclide("C12", 0.1 * 0.9893, "wo")  # carbon-12
+f82h.add_nuclide("C13", 0.1 * 0.0107, "wo")  # carbon-13
 f82h.set_density("g/cm3", 7.89)
 f82h.temperature = material_temperature
 
@@ -331,7 +334,8 @@ ss316.add_element("Ni", 12.0, "wo")
 ss316.add_element("Mo", 2.5, "wo")
 ss316.add_element("Mn", 2.0, "wo")
 ss316.add_element("Si", 1.0, "wo")
-ss316.add_element("C", 0.08, "wo")
+ss316.add_nuclide("C12", 0.08 * 0.9893, "wo")  # carbon-12
+ss316.add_nuclide("C13", 0.08 * 0.0107, "wo")  # carbon-13
 ss316.set_density("g/cm3", 7.93)
 
 copper = openmc.Material(name="Copper (TF coil stabilizer)")
@@ -460,11 +464,11 @@ bounding_sphere = openmc.Sphere(
 )
 
 # --- Helper: sector region (between the two planes) ---
-# The sector lies where y > 0 AND below the rotated plane.
+# The sector lies where y > 0 AND on the correct side of the rotated plane.
 # For the half-space signs:
 #   +plane_0 means y > 0
-#   -plane_22 means sin(phi)*x - cos(phi)*y < 0
-sector_region = +plane_0 & -plane_22
+#   +plane_22 means sin(phi)*x - cos(phi)*y > 0 (phi < 22.5 degrees)
+sector_region = +plane_0 & +plane_22
 
 
 # =============================================================================
@@ -616,6 +620,7 @@ settings.source = source
 settings.particles = args.particles
 settings.batches = args.batches
 settings.photon_transport = True     # track photons for nuclear heating
+settings.temperature = {"method": "interpolation", "default": material_temperature}
 settings.output = {"tallies": True}
 
 settings.export_to_xml()
@@ -837,4 +842,6 @@ else:
     print("  Use --weight-windows to generate variance reduction for deep shielding.")
     print("=" * 72)
     print("XML files written: materials.xml, geometry.xml, settings.xml, tallies.xml")
-    print("Run with: openmc")
+    print(f"\nRunning simulation...")
+    openmc.run()
+    print("Simulation complete.")
